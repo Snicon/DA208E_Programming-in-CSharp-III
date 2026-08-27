@@ -7,4 +7,12 @@
         <RootNamespace>DA208E_Assignment1</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Pages\Index\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Event\Event.cshtml" />
+    </ItemGroup>
+
 </Project>

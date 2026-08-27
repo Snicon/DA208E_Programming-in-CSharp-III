@@ -48,3 +48,9 @@ a.text-danger:hover {
   text-wrap: wrap;
   background-color: #f8f9fa;
 }
+
+
+/* Text formatting */
+h1.emphasis {
+  font-family: 'Pinyon Script', cursive;
+}

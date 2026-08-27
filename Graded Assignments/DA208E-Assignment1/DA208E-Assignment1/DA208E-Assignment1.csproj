@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\Index\" />
+      <_ContentIncludedByDefault Remove="Pages\Event\Event.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Event\Event.cshtml" />
+      <Folder Include="wwwroot\css\pages\" />
     </ItemGroup>
 
 </Project>

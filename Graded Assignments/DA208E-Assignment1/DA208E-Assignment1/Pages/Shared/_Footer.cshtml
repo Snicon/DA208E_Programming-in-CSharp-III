@@ -1,0 +1,28 @@
+<footer class="footer text-muted">
+    <div class="container">
+        <div class="row justify-content-between align-items-center py-5 flex-wrap">
+            <div class="col-sm-6 text-center text-sm-start">
+                <h3 class="text-dark">Wedding App</h3>
+                <p class="mb-0">The first assignment for the course Programming in C#, III.</p>
+            </div>
+            <nav class="col-sm-6 mt-4 mt-sm-0">
+                <ul class="nav justify-content-center justify-content-sm-end text-decoration-underline">
+                    @await Html.PartialAsync("_NavItem", new NavItemModel("/Index", "Home"))
+                    @await Html.PartialAsync("_NavItem", new NavItemModel("/Event", "Event"))
+                    @await Html.PartialAsync("_NavItem", new NavItemModel("/Gallery", "Gallery"))
+                    @await Html.PartialAsync("_NavItem", new NavItemModel("/Guests/Rsvp", "RSVP"))
+                    @await Html.PartialAsync("_NavItem", new NavItemModel("/Guests/Index", "Guests"))
+                    @await Html.PartialAsync("_NavItem", new NavItemModel("/Privacy", "Privacy"))
+                </ul>
+            </nav>
+        </div>
+        <div class="row border-top">
+            <div class="col-12 my-4 text-center">
+                <p>
+                    &copy; 2026 - <strong>Wedding App</strong> - This website was created by <a href="https://snicon.rip">Sixten Peterson</a> for the course
+                    <a class="text-danger" href="https://mau.se/en/study-education/courses/da208e">DA208E</a> at <a class="text-danger" href="https://mau.se/en/">Malmö University</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

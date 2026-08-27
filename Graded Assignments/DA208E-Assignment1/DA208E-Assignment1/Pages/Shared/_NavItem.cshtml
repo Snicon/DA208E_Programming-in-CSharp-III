@@ -1,11 +1,13 @@
 @model NavItemModel;
 
 @{
-    var isActive = Context.Request.Path.StartsWithSegments(Model.Page);
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString().ToLower();
+    var targetPage = Model.Page.ToLower().TrimEnd('/');
+    var isActive = currentPage == targetPage || currentPage == targetPage + "/index";
 }
 
 <li class="nav-item">
-    <a asp-page="@Model.Page" class="nav-link text-dark @(isActive ? "active" : "")" asp-area="">
+    <a asp-page="@Model.Page" class="nav-link @(isActive ? "active" : "")" asp-area="">
         @Model.Label
     </a>
 </li>

@@ -1,0 +1,11 @@
+@model NavItemModel;
+
+@{
+    var isActive = Context.Request.Path.StartsWithSegments(Model.Page);
+}
+
+<li class="nav-item">
+    <a asp-page="@Model.Page" class="nav-link text-dark @(isActive ? "active" : "")" asp-area="">
+        @Model.Label
+    </a>
+</li>

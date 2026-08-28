@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\css\pages\" />
+      <Folder Include="wwwroot\img\" />
     </ItemGroup>
 
 </Project>

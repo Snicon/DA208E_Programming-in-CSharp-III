@@ -54,3 +54,7 @@ a.text-danger:hover {
 h1.emphasis {
   font-family: 'Pinyon Script', cursive;
 }
+
+.card.img-card {
+  width: 20rem;
+}

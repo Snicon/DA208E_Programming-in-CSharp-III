@@ -6,6 +6,47 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-    <p>To be updated with content...</p>
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+
+    <form action="" class="text-start">
+        <fieldset>
+            <legend>Submit your RSVP</legend>
+            <div class="mb-3">
+                <label for="name" class="form-label">Full name</label>
+                <input type="text" id="name" class="form-control" aria-describedby="nameHelpBlock" required>
+                <div id="nameHelpBlock" class="form-text">
+                    Your full name. Must be at least x chars long.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address (optional)</label>
+                <input type="text" id="email" class="form-control" aria-describedby="emailHelpBlock">
+                <div id="emailHelpBlock" class="form-text">
+                    Your e-mail address. This field is optional.
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="attendance" id="attending">
+                    <label class="form-check-label" for="attending">
+                        I will attend the event
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="attendance" id="not_attending" checked>
+                    <label class="form-check-label" for="not_attending">
+                        I will not attend the event
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message to the event hosts</label>
+                <textarea class="form-control" id="message" aria-describedby="messageHelpBlock"></textarea>
+                <div id="messageHelpBlock" class="form-text">
+                    Feel free to write anything you would like for the hosts to know, or just wish them good luck!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit RSVP</button>
+        </fieldset>
+    </form>
 </div>

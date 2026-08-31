@@ -9,16 +9,15 @@ public class Guest
     
     [StringLength(60, MinimumLength = 3)]
     [Required]
-    public required string Name { get; set; }
+    public string Name { get; set; }
     
-    [Required]
     [EmailAddress] // From p.164 in ASP.NET Core in action (Third edition) by Andrew Lock
-    public required string Email { get; set; }
+    public string Email { get; set; }
     
     [Required]
-    public required bool Attending { get; set; }
+    public bool Attending { get; set; }
     
     [StringLength(200)] // Maximum of 200 chars according to p.5 "Assignment 1 - Help" document
-    public required string Message { get; set; }
+    public string Message { get; set; }
     #endregion
 }

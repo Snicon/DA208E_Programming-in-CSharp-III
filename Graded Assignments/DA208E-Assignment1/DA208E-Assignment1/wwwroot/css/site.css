@@ -58,3 +58,14 @@ h1.emphasis {
 .card.img-card {
   width: 20rem;
 }
+
+
+/* Failed validation styling */
+.input-validation-error {
+  border-color: #dc3545 !important;
+}
+
+.input-validation-error:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 60, 0.25) !important;
+}

@@ -1,7 +1,13 @@
+using DA208E_Assignment1.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Registers a single instance of GuestManager, see first image on p.7 of the
+// Assignment 1 help document.
+builder.Services.AddSingleton<GuestService>();
 
 var app = builder.Build();
 

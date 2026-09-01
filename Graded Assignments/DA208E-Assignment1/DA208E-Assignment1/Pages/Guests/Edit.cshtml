@@ -2,10 +2,57 @@
 @model DA208E_Assignment1.Pages.Guests.Edit
 
 @{
-    ViewData["Title"] = "Edit Guest";
+    ViewData["Title"] = "Edit RSVP entry";
 }
 
 <div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-    <p>To be updated with content...</p>
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+
+    <form method="POST" class="text-start">
+        <input type="hidden" asp-for="Guest.Id" />
+        
+        <fieldset>
+            <legend>Submit your RSVP</legend>
+            <div class="mb-3">
+                <label asp-for="Guest.Name" class="form-label"></label>
+                <input asp-for="Guest.Name" class="form-control" aria-describedby="nameHelpBlock">
+                <span asp-validation-for="Guest.Name" class="text-danger"></span>
+                <div id="nameHelpBlock" class="form-text">
+                    Your full name. Must be at least x chars long.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Guest.Email" class="form-label">Email address (optional)</label>
+                <input asp-for="Guest.Email" class="form-control" aria-describedby="emailHelpBlock">
+                <span asp-validation-for="Guest.Email" class="text-danger"></span>
+                <div id="emailHelpBlock" class="form-text">
+                    Your e-mail address. This field is optional.
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input asp-for="Guest.Attending" class="form-check-input" type="radio" value="true" id="attending">
+                    <label class="form-check-label" for="attending">
+                        I will attend the event
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="Guest.Attending" class="form-check-input" type="radio" value="false" id="not_attending" checked>
+                    <label class="form-check-label" for="not_attending">
+                        I will not attend the event
+                    </label>
+                </div>
+                <span asp-validation-for="Guest.Attending" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Guest.Message" class="form-label">Message to the event hosts</label>
+                <textarea asp-for="Guest.Message" class="form-control" aria-describedby="messageHelpBlock"></textarea>
+                <span asp-validation-for="Guest.Message" class="text-danger"></span>
+                <div id="messageHelpBlock" class="form-text">
+                    Feel free to write anything you would like for the hosts to know, or just wish them good luck!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes to RSVP</button>
+        </fieldset>
+    </form>
 </div>

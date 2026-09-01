@@ -20,7 +20,7 @@ public class Rsvp : PageModel
     
     public IActionResult OnPost()
     {
-        if (!ModelState.IsValid)
+        if (!ModelState.IsValid) // Validation check, failed
             return Page();
         
         _guestService.Add(Guest);

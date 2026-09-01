@@ -1,4 +1,5 @@
 @page
+@using DA208E_Assignment1.Models
 @model DA208E_Assignment1.Pages.Guests.Index
 
 @{
@@ -6,6 +7,50 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-    <p>To be updated with content...</p>
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+    <p>View and manage the guest list below.</p>
+    
+    @if (Model.Guests.Count == 0)
+    {
+        <p>I'm sorry to say that your event doesn't seem quite popular (yet!), there are no guest RSVPs registered yet.</p>
+    }
+    else
+    {
+        <table class="table table-striped text-start">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Attending</th>
+                <th scope="col">Message</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var guest in Model.Guests)
+            {
+                <tr>
+                    <td>@guest.Name</td>
+                    <td>@guest.Email</td>
+                    <td>
+                        @if (guest.Attending)
+                        {
+                            <span>Yes</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </td>
+                    <td>@guest.Message</td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <caption>Total Guests: @Model.Guests.Count</caption>
+        </table>
+    }
 </div>

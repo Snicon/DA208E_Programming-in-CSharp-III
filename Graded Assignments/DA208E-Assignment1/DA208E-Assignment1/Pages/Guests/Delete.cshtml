@@ -1,0 +1,45 @@
+@page
+@model DA208E_Assignment1.Pages.Guests.Delete
+
+@{
+    ViewData["Title"] = "Delete guest entry";
+}
+
+<div class="text-center">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+    
+    <div class="card mt-5 col-sm-12 col-md-9 col-lg-6 mx-auto">
+        <h5 class="card-header">Deletion confirmation</h5>
+        <div class="card-body">
+            <p class="card-text">
+                Are you sure you want to delete <em>@Model.Guest.Name</em>'s RSVP entry?
+                There is no way to reverse this action later. Once it is gone, it's gone forever.
+            </p>
+            
+            <div>
+                <p class="card-text">
+                    By pressing "Delete", the following data will be deleted:
+                </p>
+                <dl>
+                    <dt>Name</dt>
+                    <dd>@Model.Guest.Name</dd>
+                    
+                    <dt>Email</dt>
+                    <dd>@Model.Guest.Email</dd>
+                    
+                    <dt>Attending</dt>
+                    <dd>@Model.Guest.Attending</dd>
+                    
+                    <dt>Message</dt>
+                    <dd>@Model.Guest.Message</dd>
+                </dl>
+            </div>
+            
+            <form method="post" class="d-flex justify-content-center gap-4">
+                <input type="hidden" asp-for="Guest.Id" />
+                <button type="submit" class="btn btn-danger mt-4">Delete</button>
+                <a asp-page="Index" class="btn btn-secondary mt-4">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

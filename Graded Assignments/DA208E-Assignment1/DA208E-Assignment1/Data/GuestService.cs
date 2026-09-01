@@ -6,7 +6,7 @@ public class GuestService : IDataService<Guest>
 {
     #region Fields
 
-    private readonly List<Guest> _guests = []; // Field for storing list of all guests
+    private readonly List<Guest> _guests = new(); // Field for storing list of all guests
     private int _nextId = 1; // Used for assigning unique id's
     #endregion
     

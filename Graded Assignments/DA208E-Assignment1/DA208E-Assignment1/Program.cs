@@ -1,4 +1,5 @@
 using DA208E_Assignment1.Data;
+using DA208E_Assignment1.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,16 @@ builder.Services.AddRazorPages();
 // Registers a single instance of GuestManager, see first image on p.7 of the
 // Assignment 1 help document.
 builder.Services.AddSingleton<GuestService>();
+
+// Using the same principle as above since this data will be used on multiple pages
+Event eventInfo = new Event() {
+    Title = "Wedding",
+    Date = DateOnly.FromDateTime(DateTime.Now),
+    Time = new TimeOnly().AddHours(15),
+    Location = "Springfield Wedding Hall, Lund, Sweden"
+};
+
+builder.Services.AddSingleton<Event>(eventInfo);
 
 var app = builder.Build();
 

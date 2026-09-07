@@ -32,7 +32,19 @@ public class Edit : PageModel
         if (!ModelState.IsValid) // Validation check, failed
             return Page();
         
-        _guestService.Update(Guest);
+        bool updateSucceeded = _guestService.Update(Guest);
+
+        if (updateSucceeded)
+        {
+            TempData["MessageType"] = "success";
+            TempData["Message"] = "Guest successfully updated.";
+        }
+        else
+        {
+            TempData["MessageType"] = "danger";
+            TempData["Message"] = "Failed to update guest.";
+        }
+        
         return RedirectToPage("Index");
     }
 }

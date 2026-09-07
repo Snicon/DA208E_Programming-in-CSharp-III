@@ -31,7 +31,20 @@ public class Delete : PageModel
     public IActionResult OnPost()
     {
         if (Guest != null)
-            _guestService.Delete(Guest.Id);
+        {
+            bool deletionSucceeded = _guestService.Delete(Guest.Id);
+            
+            if (deletionSucceeded)
+            {
+                TempData["MessageType"] = "success";
+                TempData["Message"] = "Guest successfully deleted.";
+            }
+            else
+            {
+                TempData["MessageType"] = "danger";
+                TempData["Message"] = "Failed to delete guest.";
+            }
+        }
         
         return RedirectToPage("Index");
     }

@@ -16,7 +16,7 @@
                 <input asp-for="Guest.Name" class="form-control" aria-describedby="nameHelpBlock">
                 <span asp-validation-for="Guest.Name" class="text-danger"></span>
                 <div id="nameHelpBlock" class="form-text">
-                    Your full name. Must be at least x chars long.
+                    Your full name. Must be at least 3 characters and no longer than 60 characters.
                 </div>
             </div>
             <div class="mb-3">
@@ -47,7 +47,7 @@
                 <textarea asp-for="Guest.Message" class="form-control" aria-describedby="messageHelpBlock"></textarea>
                 <span asp-validation-for="Guest.Message" class="text-danger"></span>
                 <div id="messageHelpBlock" class="form-text">
-                    Feel free to write anything you would like for the hosts to know, or just wish them good luck!
+                    Feel free to write anything you would like for the hosts to know, or just wish them good luck! This field is optional but cannot be longer than 200 characters.
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit RSVP</button>

@@ -25,6 +25,8 @@ public class Rsvp : PageModel
         
         _guestService.Add(Guest);
         
+        TempData["Attending"] = Guest.Attending; // Passing some guest data as TempData to make the confirmation page more dynamic
+        
         return RedirectToPage("Confirmation");
     }
     

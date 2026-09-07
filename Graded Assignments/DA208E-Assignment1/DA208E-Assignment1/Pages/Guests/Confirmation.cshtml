@@ -5,10 +5,37 @@
     ViewData["Title"] = "Confirmation";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4 emphasis">Participation confirmed!</h1>
-    <p>We look forward to sharing our big day with you!</p>
-    
-    <h2 class="mt-5">To sum it all up:</h2>
-    <p>Welcome to <em>@Model.EventInfo.Title</em> at @Model.EventInfo.Location, <time class="fw-bold" datetime="2026-10-12T15:00">@Model.EventInfo.Date (@Model.EventInfo.Time)</time>.</p>
+    @if (TempData["Attending"] != null)
+    {
+        <h1 class="display-4 emphasis">
+            @if (TempData["Attending"].ToString().Equals("True"))
+            {
+                <span>Participation confirmed!</span>
+            }
+            else
+            {
+                <span>Non-participation confirmed!</span>
+            }
+        </h1>
+        @if (TempData["Attending"].ToString().Equals("True"))
+        {
+            <img src="~/img/excited.jpg" width="350px" class="rounded-2 mb-2 mt-4" alt="A white and brown cat looks excited at you with a big smile, showing all of its teeth in a non-threatening way."/>
+            <p class="fs-4">We are so happy you decided to participate and look forward to sharing our big day with you!</p>
+
+            <h2 class="mt-5">To summarise the details:</h2>
+            <p>Welcome to <em>@Model.EventInfo.Title</em> at @Model.EventInfo.Location, <time class="fw-bold" datetime="2026-10-12T15:00">@Model.EventInfo.Date (@Model.EventInfo.Time)</time>.</p>
+        }
+        else
+        {
+            <img src="~/img/miss-you.jpg" width="400px" class="rounded-2 mb-2 mt-4" alt="A sad brown and white dog lying on a brown leather sofa missing its owner."/>
+            <p class="fs-4">We will miss you on our big day, but wish you the best.</p>
+        }
+    }
+    else
+    {
+        <h1 class="display-4 emphasis">Something went wrong!</h1>
+        <p>This may happen if you visit the page without getting redirected from the <a asp-page="/Guests/Rsvp">RSVP-form</a>, if you have not already filled out the form please do so.</p>
+    }
 </div>

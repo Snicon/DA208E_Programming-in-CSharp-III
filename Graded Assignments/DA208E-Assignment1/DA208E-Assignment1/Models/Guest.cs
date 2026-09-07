@@ -12,12 +12,12 @@ public class Guest
     public string Name { get; set; }
     
     [EmailAddress] // From p.164 in ASP.NET Core in action (Third edition) by Andrew Lock
-    public string Email { get; set; }
+    public string? Email { get; set; }
     
     [Required]
     public bool Attending { get; set; }
     
     [StringLength(200)] // Maximum of 200 chars according to p.5 "Assignment 1 - Help" document
-    public string Message { get; set; }
+    public string? Message { get; set; }
     #endregion
 }

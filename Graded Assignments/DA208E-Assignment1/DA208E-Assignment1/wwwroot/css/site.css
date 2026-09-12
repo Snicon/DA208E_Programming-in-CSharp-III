@@ -72,9 +72,25 @@ h1.emphasis {
 
 /* Index background image */
 .background {
+  position: relative;
   min-height: 80vh;
-  background-image: url('../img/background.jpg');
-  background-size: cover;
-  background-position: center;
   border-radius: 1.6rem;
+  background: url("../img/background.jpg") center / cover no-repeat;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgb(0 0 0 / 15%);
+}
+
+.invite {
+  position: relative;
+  z-index: 1;
+  width: min(90%, 700px);
+  margin-inline: auto;
+  padding-top: 6rem;
+  text-align: center;
 }

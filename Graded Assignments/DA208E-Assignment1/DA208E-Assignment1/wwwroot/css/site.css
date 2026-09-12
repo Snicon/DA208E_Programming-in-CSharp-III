@@ -69,3 +69,12 @@ h1.emphasis {
   border-color: #dc3545 !important;
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 60, 0.25) !important;
 }
+
+/* Index background image */
+.background {
+  min-height: 80vh;
+  background-image: url('../img/background.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 1.6rem;
+}

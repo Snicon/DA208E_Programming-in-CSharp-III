@@ -12,13 +12,13 @@
 <header>
     @await Html.PartialAsync("_NavBar")
 </header>
-<div class="container">
-    <main role="main" class="pb-3">
+<div class="page">
+    <main role="main" class="pb-3 container">
         @RenderBody()
     </main>
+    
+    @await Html.PartialAsync("_Footer")
 </div>
-
-@await Html.PartialAsync("_Footer")
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -67,8 +67,8 @@ p.emphasis {
   margin: 0;
 }
 
-.card.img-card {
-  width: 20rem;
+.img-card {
+  min-width: 20rem !important;
 }
 
 

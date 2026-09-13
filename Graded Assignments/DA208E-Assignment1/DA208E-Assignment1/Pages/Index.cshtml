@@ -4,12 +4,59 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="background">
+<div class="background container">
     <section class="invite">
         <h1 class="display-4 emphasis text-warning">We are getting married!</h1>
         <p>We are most delighted to invite you to celebrate this special occasion with us.</p>
         <p><a asp-page="/Event">View all details, and let us know if you will be able to join us.</a> Kindly RSVP by <time class="fw-bold" datetime="2026-10-12">October 12</time>.</p>
         <p>We truly hope you can be a part of our big day!</p>
-        <!-- Todo: Improve the design -->
     </section>
 </div>
+
+<section class="introduction">
+    <div class="container">
+        <h2>Who are we then?</h2>
+        
+        <p>Well, we would like to hope that you know us already if you have managed to find your way here. But in case you don't, we are John and Jane.</p>
+        <p>We are very excited to be getting married and even more excited to celebrate with the people who mean the most to us. This website has all the details you need for the big day, including information about the venue, timings and, most importantly, a place to let us know whether you can join us.</p>
+        <p>We hope to see you there!</p>
+        
+        <p class="emphasis">John & Jane</p>
+    </div>
+</section>
+
+<section class="story container">
+    <h2>Our story in just two paragraphs</h2>
+
+    <p>
+        Once upon a time, John and Jane met and began what seemed like a
+        perfectly ordinary conversation. Neither of us knew at the time
+        that it would lead to years of adventures, laughter, questionable
+        decisions and an impressive number of meals shared together. It
+        did not take long to discover that we made a pretty good team,
+        although we still do not agree on everything, especially when it
+        comes to choosing what to watch.
+    </p>
+    <p>
+        Since then, we have built a life full of favourite places, familiar
+        routines and memories that mean the world to us. Now we are taking
+        the next step and getting married. We could not be happier to
+        celebrate with the people who have helped make our story so special,
+        and we hope you will join us for the next exciting chapter.
+    </p>
+</section>
+
+<section class="container website-guide">
+    <h2>Everything you need to know</h2>
+    <p>
+        We have put together this website with all the information you
+        need for the day. Have a look around, and when you are ready,
+        please let us know whether you will be able to join us.
+    </p>
+    <p>
+        Ps, if you ever get lost on the website just scroll down to the
+        bottom and be on the look out for the "Home" link in the footer.
+    </p>
+
+    <a asp-page="/Guests/Rsvp">Complete your RSVP</a>
+</section>

@@ -58,8 +58,13 @@ a.text-danger:hover {
 
 
 /* Text formatting */
-h1.emphasis {
+h1.emphasis, p.emphasis {
   font-family: 'Pinyon Script', cursive;
+}
+
+p.emphasis {
+  font-size: 2rem;
+  margin: 0;
 }
 
 .card.img-card {
@@ -93,6 +98,10 @@ h1.emphasis {
   background: rgb(0 0 0 / 15%);
 }
 
+.introduction, .invite, .story, .website-guide {
+  font-size: 1.2rem;
+}
+
 .invite {
   position: relative;
   z-index: 1;
@@ -100,4 +109,20 @@ h1.emphasis {
   margin-inline: auto;
   padding-top: 6rem;
   text-align: center;
+}
+
+.introduction {
+  background-color: #ffca2c;
+  padding: 2.6rem 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin: 12rem 0;
+}
+
+.introduction h2 {
+  margin-bottom: 1rem;
+}
+
+.website-guide {
+  margin-top: 12rem;
 }

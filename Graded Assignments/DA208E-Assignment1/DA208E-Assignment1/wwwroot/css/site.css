@@ -50,10 +50,10 @@ a.text-danger:hover {
 
 /* Footer */
 .footer {
-  width: 100%;
   white-space: nowrap;
   text-wrap: wrap;
   background-color: #f8f9fa;
+  margin-top: 4rem;
 }
 
 

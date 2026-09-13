@@ -98,7 +98,7 @@ p.emphasis {
   background: rgb(0 0 0 / 15%);
 }
 
-.introduction, .invite, .story, .website-guide {
+.standout, .invite, .story, .website-guide {
   font-size: 1.2rem;
 }
 
@@ -111,7 +111,7 @@ p.emphasis {
   text-align: center;
 }
 
-.introduction {
+.standout {
   background-color: #ffca2c;
   padding: 2.6rem 0;
   border-top: 1px solid black;
@@ -125,4 +125,44 @@ p.emphasis {
 
 .website-guide {
   margin-top: 12rem;
+}
+
+.standout .row .col-1 {
+  background-color: #FFBF00;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  min-width: 375px;
+}
+
+.standout .row .col-1:hover {
+  background-color: #FFD421;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.standout .row .col-1 img {
+  width: 3.5rem;
+  height: auto;
+}
+
+.schedule {
+  margin-top: 6rem;
+}
+
+@media (max-width: 992px) {
+  .standout.card {
+    margin: 0 0 !important;
+  }
+}
+
+.standout.card {
+  background-color: #FFBF00;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  min-width: 375px;
+  margin: 4rem 0;
+}
+
+.standout.card:hover {
+  background-color: #FFD421;
+  transition: background-color 0.4s ease-in-out;
 }

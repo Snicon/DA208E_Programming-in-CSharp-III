@@ -1,34 +1,43 @@
 @page
-@model DA208E_Assignment1.Pages.Gallery
+<!-- Sixten Peterson (AQ9300) 2026-09-14 -->
+@model GalleryModel
 
 @{
     ViewData["Title"] = "Gallery";
 }
 
 <div class="text-center container">
-    <h1 class="display-4 emphasis mb-5">Photo gallery</h1>
-    <section class="row gap-5">
-        <div class="col img-card">
-            <div class="card">
-                <img src="~/img/kiss.jpg" class="card-img-top" alt="The couple kissing on a rock surrounded by water">
-                <div class="card-body">
-                    <p class="card-text">The couple sharing a romantic kiss together.</p>
+    <!-- Photo gallery section -->
+    <section>
+        <h1 class="display-4 emphasis mb-5">Photo gallery</h1>
+        <div class="row gap-5">
+            <!-- Image card 1 -->
+            <div class="col img-card">
+                <div class="card">
+                    <img src="~/img/kiss.jpg" class="card-img-top" alt="The couple kissing on a rock surrounded by water">
+                    <div class="card-body">
+                        <p class="card-text">The couple sharing a romantic kiss together.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col img-card">
-            <div class="card">
-                <img src="~/img/venue.jpg" class="card-img-top" alt="The wedding venue">
-                <div class="card-body">
-                    <p class="card-text">The wedding venue before all guests arrived.</p>
+            
+            <!-- Image card 2 -->
+            <div class="col img-card">
+                <div class="card">
+                    <img src="~/img/venue.jpg" class="card-img-top" alt="The wedding venue">
+                    <div class="card-body">
+                        <p class="card-text">The wedding venue before all guests arrived.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col img-card">
-            <div class="card">
-                <img src="~/img/table.jpg" class="card-img-top" alt="The wedding venue">
-                <div class="card-body">
-                    <p class="card-text">The table set and ready to serve great food.</p>
+            
+            <!-- Image card 3 -->
+            <div class="col img-card">
+                <div class="card">
+                    <img src="~/img/table.jpg" class="card-img-top" alt="The wedding venue">
+                    <div class="card-body">
+                        <p class="card-text">The table set and ready to serve great food.</p>
+                    </div>
                 </div>
             </div>
         </div>

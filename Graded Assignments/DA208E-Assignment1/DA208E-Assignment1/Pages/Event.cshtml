@@ -1,9 +1,9 @@
 @page
-@model DA208E_Assignment1.Pages.Event
+@model EventModel
 
 @{
     ViewData["Title"] = "Event";
-    var eventDateTime = Model.EventInfo.Date.ToDateTime(Model.EventInfo.Time);
+    DateTime eventDateTime = Model.EventInfo.Date.ToDateTime(Model.EventInfo.Time); // Formatting a datetime object
 }
 
 <div class="text-center container">

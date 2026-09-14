@@ -1,3 +1,4 @@
+// Sixten Peterson (AQ9300) 2026-09-14, this file is unchanged from project scaffolding
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

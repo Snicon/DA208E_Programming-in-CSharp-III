@@ -1,18 +1,21 @@
 ﻿@page
+<!-- Sixten Peterson (AQ9300) 2026-09-14 -->
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
+<!-- Introduction section, text appears on top of a background image -->
 <div class="background container">
     <section class="invite">
         <h1 class="display-4 emphasis text-warning">We are getting married!</h1>
         <p>We are most delighted to invite you to celebrate this special occasion with us.</p>
-        <p><a asp-page="/Event">View all details, and let us know if you will be able to join us.</a> Kindly RSVP by <time class="fw-bold" datetime="@Model.EventInfo.Date">@Model.EventInfo.Date</time>.</p>
+        <p><a asp-page="/Event">View all details and let us know if you will be able to join us.</a> Kindly RSVP by <time class="fw-bold" datetime="@Model.EventInfo.Date">@Model.EventInfo.Date</time>.</p>
         <p>We truly hope you can be a part of our big day!</p>
     </section>
 </div>
 
+<!-- Section for introducing the couple, stands out with a yellow background -->
 <section class="standout">
     <div class="container">
         <h2>Who are we then?</h2>
@@ -25,6 +28,7 @@
     </div>
 </section>
 
+<!-- Section for couples story -->
 <section class="story container">
     <h2>Our story in just two paragraphs</h2>
 
@@ -46,6 +50,7 @@
     </p>
 </section>
 
+<!-- Website guide section helping the visitors understand the website. -->
 <section class="container website-guide">
     <h2>Everything you need to know</h2>
     <p>
@@ -58,5 +63,6 @@
         bottom and be on the look out for the "Home" link in the footer.
     </p>
 
+    <!-- Linking to RSVP -->
     <a asp-page="/Guests/Rsvp">Complete your RSVP</a>
 </section>

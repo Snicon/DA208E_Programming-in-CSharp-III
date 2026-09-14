@@ -1,5 +1,6 @@
 @page
-@model DA208E_Assignment1.Pages.Guests.Edit
+<!-- Sixten Peterson (AQ9300) 2026-09-14 -->
+@model EditModel
 
 @{
     ViewData["Title"] = "Edit RSVP entry";
@@ -8,9 +9,9 @@
 <div class="text-center container">
     <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
 
+    <!-- Edit RSVP form -->
     <form method="POST" class="text-start">
         <input type="hidden" asp-for="Guest.Id" />
-        
         <fieldset>
             <legend>Submit your RSVP</legend>
             <div class="mb-3">

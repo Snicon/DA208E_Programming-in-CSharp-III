@@ -1,11 +1,6 @@
+/* Sixten Peterson (AQ9300) 2026-09-14 */
 /* Importing font */
 @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -23,6 +18,16 @@ html {
   font-size: 16px;
 }
 
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Layouting */
 .page {
   min-height: 100vh;
   display: flex;
@@ -33,20 +38,6 @@ main {
   flex: 1;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-}
-
-/* General anchor */
-a.text-danger:hover {
-  color: #8B1824 !important;
-}
-
 
 /* Footer */
 .footer {
@@ -54,6 +45,12 @@ a.text-danger:hover {
   text-wrap: wrap;
   background-color: #f8f9fa;
   margin-top: 4rem;
+}
+
+
+/* General anchor */
+a.text-danger:hover {
+  color: #8B1824 !important;
 }
 
 
@@ -95,9 +92,11 @@ p.emphasis {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: rgb(0 0 0 / 15%);
+  background: rgb(0 0 0 / 15%); /* Darkening image to make text more readable */
 }
 
+
+/* Index sections + standout section */
 .standout, .invite, .story, .website-guide {
   font-size: 1.2rem;
 }
@@ -127,6 +126,8 @@ p.emphasis {
   margin-top: 12rem;
 }
 
+
+/* Standout section */
 .standout .row .col-1 {
   background-color: #FFBF00;
   padding: 3rem 2rem;
@@ -139,15 +140,8 @@ p.emphasis {
   transition: background-color 0.4s ease-in-out;
 }
 
-.standout .row .col-1 img {
-  width: 3.5rem;
-  height: auto;
-}
 
-.schedule {
-  margin-top: 6rem;
-}
-
+/* Standout cards */
 @media (max-width: 992px) {
   .standout.card {
     margin: 0 0 !important;
@@ -165,4 +159,14 @@ p.emphasis {
 .standout.card:hover {
   background-color: #FFD421;
   transition: background-color 0.4s ease-in-out;
+}
+
+.standout .row .col-1 img {
+  width: 3.5rem;
+  height: auto;
+}
+
+/* Schedule */
+.schedule {
+  margin-top: 6rem;
 }

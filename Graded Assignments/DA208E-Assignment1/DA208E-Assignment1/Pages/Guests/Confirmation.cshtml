@@ -1,12 +1,15 @@
 @page
-@model DA208E_Assignment1.Pages.Guests.Confirmation
+<!-- Sixten Peterson (AQ9300) 2026-09-14 -->
+@model ConfirmationModel
 
 @{
     ViewData["Title"] = "Confirmation";
 }
 
+<!-- Depending on whether the guest is attending or not, two different "views" are shown to make the page more dynamic -->
 
 <div class="text-center container">
+    <!-- Shows different titles depending on if the guest is participating or not -->
     @if (TempData["Attending"] != null)
     {
         <h1 class="display-4 emphasis">
@@ -19,6 +22,8 @@
                 <span>Non-participation confirmed!</span>
             }
         </h1>
+        
+        <!-- If guest is attending an image of a happy cat appears along with an excited message + event details in short -->
         @if (TempData["Attending"].ToString().Equals("True"))
         {
             <img src="~/img/excited.jpg" width="350px" class="rounded-2 mb-2 mt-4" alt="A white and brown cat looks excited at you with a big smile, showing all of its teeth in a non-threatening way."/>
@@ -29,12 +34,14 @@
         }
         else
         {
+            <!-- Since the guest is not participating a sad dog is shown along with a less excited message -->
             <img src="~/img/miss-you.jpg" width="400px" class="rounded-2 mb-2 mt-4" alt="A sad brown and white dog lying on a brown leather sofa missing its owner."/>
             <p class="fs-4">We will miss you on our big day, but wish you the best.</p>
         }
     }
     else
     {
+        <!-- This happens when a user gets to the page without being redirected with tempdata for attending. Should suffice. -->
         <h1 class="display-4 emphasis">Something went wrong!</h1>
         <p>This may happen if you visit the page without getting redirected from the <a asp-page="/Guests/Rsvp">RSVP-form</a>, if you have not already filled out the form please do so.</p>
     }

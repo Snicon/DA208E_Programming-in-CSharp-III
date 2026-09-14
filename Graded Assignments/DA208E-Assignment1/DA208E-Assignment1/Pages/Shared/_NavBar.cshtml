@@ -1,3 +1,5 @@
+<!-- Sixten Peterson (AQ9300) 2026-09-14 -->
+<!-- Very simple partial used for the navbar to clean up the _Layout.cshtml file -->
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-5">
     <div class="container">
         <a class="navbar-brand" asp-area="" asp-page="/Index">Wedding App</a>
@@ -7,6 +9,7 @@
         </button>
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
+                <!-- Using the NavItem partial to display all nav items -->
                 @await Html.PartialAsync("_NavItem", new NavItemModel("/Index", "Home"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("/Event", "Event"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("/Gallery", "Gallery"))

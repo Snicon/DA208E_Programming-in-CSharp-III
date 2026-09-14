@@ -1,4 +1,5 @@
 @page
+<!-- Sixten Peterson (AQ9300) 2026-09-14 -->
 @model DA208E_Assignment1.Pages.Guests.Delete
 
 @{
@@ -9,7 +10,9 @@
     <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
     
     <div class="card mt-5 col-sm-12 col-md-9 col-lg-6 mx-auto">
-        <h5 class="card-header">Deletion confirmation</h5>
+        <h2 class="card-header">Deletion confirmation</h2>
+        
+        <!-- Card displaying data and asking for confirmation. -->
         <div class="card-body">
             <p class="card-text">
                 Are you sure you want to delete <em>@Model.Guest.Name</em>'s RSVP entry?
@@ -35,6 +38,7 @@
                 </dl>
             </div>
             
+            <!-- Form used to delete if submit button is pressed -->
             <form method="post" class="d-flex justify-content-center gap-4">
                 <input type="hidden" asp-for="Guest.Id" />
                 <button type="submit" class="btn btn-danger mt-4">Delete</button>

@@ -1,7 +1,11 @@
+// Sixten Peterson (AQ9300) 2026-09-14
 using System.ComponentModel.DataAnnotations;
 
 namespace DA208E_Assignment1.Models;
 
+/// <summary>
+/// Guest Model representing a Guest. Data annotations are used for validation.
+/// </summary>
 public class Guest
 {
     #region Properties

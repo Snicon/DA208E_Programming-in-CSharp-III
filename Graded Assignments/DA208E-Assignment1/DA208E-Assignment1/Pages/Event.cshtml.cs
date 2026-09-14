@@ -1,18 +1,32 @@
+// Sixten Peterson (AQ9300) 2026-09-14
+using DA208E_Assignment1.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DA208E_Assignment1.Pages;
 
-public class Event : PageModel
+/// <summary>
+/// The code-behind for the Event page of the website. Uses dependency injection to access event data.
+/// </summary>
+public class EventModel : PageModel
 {
-    public Models.Event EventInfo { get; set; }
+    #region Properies
+    public Event EventInfo { get; set; }
+    #endregion
 
-    public Event(Models.Event eventInfo)
+    #region Constructors
+    public EventModel(Event eventInfo)
     {
         EventInfo = eventInfo;
     }
+    #endregion
     
+    #region Methods
+    /// <summary>
+    /// Handles the HTTP GET request for this page. Not much being done here as of Assignment 1.
+    /// </summary>
     public void OnGet()
     {
 
     }
+    #endregion
 }

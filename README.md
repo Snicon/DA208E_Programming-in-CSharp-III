@@ -39,7 +39,7 @@ More assignments will be added as the course progresses
 |------------|-------|-|-|
 |Assignment 1|&#9745;|-|A|
 |Assignment 2|&#9744;|-|A|
-|Quiz 1      |&#9744;|-|A|
+|Quiz 1      |&#9745;|A|A|
 
 
 ### Final grade

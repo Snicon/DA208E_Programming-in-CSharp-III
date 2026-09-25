@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DA208E-Assignment2", "DA208E-Assignment2\DA208E-Assignment2.csproj", "{4609FF06-F687-4B04-B9A2-50302ECCF87B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4609FF06-F687-4B04-B9A2-50302ECCF87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4609FF06-F687-4B04-B9A2-50302ECCF87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4609FF06-F687-4B04-B9A2-50302ECCF87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4609FF06-F687-4B04-B9A2-50302ECCF87B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

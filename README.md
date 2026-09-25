@@ -27,6 +27,22 @@ The assignment intends to give practical experience with:
 - In-memory data storage
 
 ### Assignment 2 - EF, Anonymous types, methods, lambda expressions
+Assignment 2 takes the project from the prior assignment and migrates it over to ASP.NET MVC, introduces database connection and extends the web application further.
+
+The assignment intends to give practical experience with:
+- MVC architecture/design pattern
+- Controllers and Views
+- Entity Framework Core
+- Databases (SQLite or SQL Server)
+- CRUD operations
+- LINQ
+- Routing
+- Lambda expressions
+
+### Assignment 3 - ...
+To be added.
+
+### Assignment 4 - ...
 To be added.
 
 More assignments will be added as the course progresses
@@ -40,7 +56,9 @@ More assignments will be added as the course progresses
 |Assignment 1|&#9745;|-|A|
 |Assignment 2|&#9744;|-|A|
 |Quiz 1      |&#9745;|A|A|
-
+|Assignment 4|&#9744;|-|A|
+|Assignment 5|&#9744;|-|A|
+|Quiz 2      |&#9744;|-|A|
 
 ### Final grade
 To be determined...

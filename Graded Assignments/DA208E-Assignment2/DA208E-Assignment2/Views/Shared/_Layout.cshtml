@@ -14,14 +14,17 @@
     <!-- Using the _NavBar partial to show a navbar -->
     @await Html.PartialAsync("_NavBar")
 </header>
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
 
-<!-- Using the _Footer partial to show a footer -->
-@await Html.PartialAsync("_Footer")
+<div class="page">
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Using the _Footer partial to show a footer -->
+    @await Html.PartialAsync("_Footer")
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

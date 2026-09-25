@@ -1,0 +1,240 @@
+@model Event
+@{
+    ViewData["Title"] = "Event";
+    DateTime eventDateTime = Model.Date.ToDateTime(Model.Time); // Formatting a datetime object
+}
+
+<div class="text-center container">
+    <div>
+        <h1 class="display-4 emphasis">Event information</h1>
+        <p>Welcome to <em>@Model.Title</em> at @Model.Location, <time class="fw-bold" datetime="@eventDateTime.ToString("yyyy-MM-ddTHH:mm")">@Model.Date. (@Model.Time)</time>.</p>
+    </div>
+    
+    <!-- Heavily inspired by this codepen: https://codepen.io/funkwarrior/pen/BamYMZE -->
+    <div class="py-2 schedule">
+        <h2 class="mb-5">Event schedule</h2>
+        
+        <div class="row no-gutters">
+            <div class="col-lg">
+                <!-- Col for spacing -->
+            </div>
+
+            <!-- Item 1 marker & layout/spacing -->
+            <div class="col-sm-1 text-center flex-column d-none d-lg-flex">
+                <div class="row h-50">
+                    <div class="col">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="rounded-circle badge bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+
+            <!-- Item 1 card -->
+            <div class="col-sm py-2">
+                <div class="standout card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title m-0">
+                            Guests arrive
+                        </h4>
+                        <div class="float-right text-muted small mb-2">
+                            14:00
+                        </div>
+                        <p class="card-text">Find your seat, say hello and enjoy a welcome drink.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row no-gutters">
+            <!-- Item 2 card -->
+            <div class="col-sm py-2">
+                <div class="standout card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title m-0">
+                            The ceremony
+                        </h4>
+                        <div class="float-right text-muted small mb-2">
+                            15:00
+                        </div>
+                        <p class="card-text">John and Jane officially become a wedded couple</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 marker & maker "line" -->
+            <div class="col-sm-1 text-center flex-column d-none d-lg-flex">
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="rounded-circle badge bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <!-- Col for spacing -->
+            </div>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col-lg">
+                <!-- Col for spacing -->
+            </div>
+
+            <!-- Item 3 marker & layout/spacing -->
+            <div class="col-sm-1 text-center flex-column d-none d-lg-flex">
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="rounded-circle badge bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+
+            <!-- Item 3 card -->
+            <div class="col-sm py-2">
+                <div class="standout card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title m-0">
+                            Drinks and photographs
+                        </h4>
+                        <div class="float-right text-muted small mb-2">
+                            15:00
+                        </div>
+                        <p class="card-text">Time for refreshments, congratulations, and a few photographs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row no-gutters">
+            <!-- Item 4 card -->
+            <div class="col-sm py-2">
+                <div class="standout card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title m-0">
+                            Dinner
+                        </h4>
+                        <div class="float-right text-muted small mb-2">
+                            16:00
+                        </div>
+                        <p class="card-text">Good food, good company, and possibly a few speeches.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 marker & maker "line" -->
+            <div class="col-sm-1 text-center flex-column d-none d-lg-flex">
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="rounded-circle badge bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <!-- Col for spacing -->
+            </div>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col-lg">
+                <!-- Col for spacing -->
+            </div>
+
+            <!-- Item 5 marker & layout/spacing -->
+            <div class="col-sm-1 text-center flex-column d-none d-lg-flex">
+                <div class="row h-50">
+                    <div class="col border-end">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="rounded-circle badge bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+
+            <!-- Item 5 card -->
+            <div class="col-sm py-2">
+                <div class="standout card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title m-0">
+                            Dancing
+                        </h4>
+                        <div class="float-right text-muted small mb-2">
+                            17:30
+                        </div>
+                        <p class="card-text">The dance floor opens. Participation is strongly encouraged.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="standout text-center">
+    <h2 class="mb-5">Useful information</h2>
+    <div class="row row-cols-sm-6 flex-wrap justify-content-center mt-5 gap-5 mx-5">
+        <div class="col-1 rounded-4 shadow-sm">
+            <div class="icon-bg mb-3">
+                <img src="~/icons/dresscode.svg" alt="">
+            </div>
+            <h3>Dress code</h3>
+            <p class="mb-0">Formal wear is recommended, with comfortable shoes, since you'll spend a lot of time outdoors.</p>
+        </div>
+        
+        <div class="col-1 rounded-4 shadow-sm">
+            <div class="icon-bg mb-3">
+                <img src="~/icons/getting-there.svg" alt="">
+            </div>
+            <h3>Getting there</h3>
+            <p class="mb-0">Parking is available on-site. The nearest train station is approximately ten minutes away by taxi.</p>
+        </div>
+        
+        <div class="col-1 rounded-4 shadow-sm">
+            <div class="icon-bg mb-3">
+                <img src="~/icons/accommodation.svg" alt="">
+            </div>
+            <h3>Accommodation</h3>
+            <p class="mb-0">There are several hotels and guesthouses nearby, you may search the internet yourself to find what suits you best.</p>
+        </div>
+        
+        <div class="col-1 rounded-4 shadow-sm">
+            <div class="icon-bg mb-3">
+                <img src="~/icons/food-and-drinks.svg" alt="">
+            </div>
+            <h3>Food and drinks</h3>
+            <p class="mb-0">Please include any dietary requirements when you complete your RSVP to help us avoid any allergic reactions.</p>
+        </div>
+    </div>
+</section>
+
+<section class="text-center mb-5">
+    <h2>Will you be joining us?</h2>
+    <p>
+        Please let us know by <time datetime="@Model.RsvpByDate">@Model.RsvpByDate</time>. We hope you can make it!
+    </p>
+    <a class="btn btn-primary" asp-page="/Guests/Rsvp">Complete your RSVP</a>
+</section>

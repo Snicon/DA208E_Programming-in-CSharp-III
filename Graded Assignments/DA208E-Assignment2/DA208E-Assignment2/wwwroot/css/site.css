@@ -1,24 +1,21 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+/* Sixten Peterson (AQ9300) 2026-09-14 */
+/* Importing font */
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
 html {
   position: relative;
   min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
+  font-size: 16px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +25,148 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+/* Layouting */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+
+/* Footer */
+.footer {
+  white-space: nowrap;
+  text-wrap: wrap;
+  background-color: #f8f9fa;
+  margin-top: 4rem;
+}
+
+
+/* General anchor */
+a.text-danger:hover {
+  color: #8B1824 !important;
+}
+
+
+/* Text formatting */
+h1.emphasis, p.emphasis {
+  font-family: 'Pinyon Script', cursive;
+}
+
+p.emphasis {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.img-card {
+  min-width: 20rem !important;
+}
+
+
+/* Failed validation styling */
+.input-validation-error {
+  border-color: #dc3545 !important;
+}
+
+.input-validation-error:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 60, 0.25) !important;
+}
+
+/* Index background image */
+.background {
+  position: relative;
+  min-height: 80vh;
+  border-radius: 1.6rem;
+  background: url("../img/background.jpg") center / cover no-repeat;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgb(0 0 0 / 15%); /* Darkening image to make text more readable */
+}
+
+
+/* Index sections + standout section */
+.standout, .invite, .story, .website-guide {
+  font-size: 1.2rem;
+}
+
+.invite {
+  position: relative;
+  z-index: 1;
+  width: min(90%, 700px);
+  margin-inline: auto;
+  padding-top: 6rem;
+  text-align: center;
+}
+
+.standout {
+  background-color: #ffca2c;
+  padding: 2.6rem 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin: 12rem 0;
+}
+
+.introduction h2 {
+  margin-bottom: 1rem;
+}
+
+.website-guide {
+  margin-top: 12rem;
+}
+
+
+/* Standout section */
+.standout .row .col-1 {
+  background-color: #FFBF00;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  min-width: 375px;
+}
+
+.standout .row .col-1:hover {
+  background-color: #FFD421;
+  transition: background-color 0.4s ease-in-out;
+}
+
+
+/* Standout cards */
+@media (max-width: 992px) {
+  .standout.card {
+    margin: 0 0 !important;
+  }
+}
+
+.standout.card {
+  background-color: #FFBF00;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  min-width: 375px;
+  margin: 4rem 0;
+}
+
+.standout.card:hover {
+  background-color: #FFD421;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.standout .row .col-1 img {
+  width: 3.5rem;
+  height: auto;
+}
+
+/* Schedule */
+.schedule {
+  margin-top: 6rem;
 }

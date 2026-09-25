@@ -1,15 +1,9 @@
 <!-- Sixten Peterson (AQ9300) 2026-09-14 -->
 @model NavItemModel;
 
-@{
-    var currentPage = ViewContext.RouteData.Values["page"]?.ToString().ToLower(); // Getting the page value from the current route
-    var targetPage = Model.Page.ToLower().TrimEnd('/'); // Getting the page path and removes the trailing /
-    var isActive = currentPage == targetPage || currentPage == targetPage + "/index"; // Comparing if the current page is active in order to apply the active css class
-}
-
 <!-- Simple nav item partial, for better reusability. Sets active class if page is active. -->
 <li class="nav-item">
-    <a asp-page="@Model.Page" class="nav-link @(isActive ? "active" : "")" asp-area="">
+    <a asp-controller="@Model.Controller" asp-action="@Model.Action" class="nav-link">
         @Model.Label
     </a>
 </li>

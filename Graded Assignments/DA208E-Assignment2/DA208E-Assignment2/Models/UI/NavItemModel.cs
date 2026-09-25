@@ -5,26 +5,38 @@
 public class NavItemModel
 {
     #region Fields
-    private string _page; // The page associated with the nav item
+    private string _controller;
+    private string _action;
     private string _label; // A label for said page, this is what is shown as the text in the html
     #endregion
     
     #region Constructor
-    public NavItemModel(string page, string label)
+    public NavItemModel(string controller, string action, string label)
     {
-        Page = page;
+        Controller = controller;
+        Action = action;
         Label = label;
     }
     #endregion
     
     #region Properties
-    public string Page
+    public string Controller
     {
-        get => _page;
+        get => _controller;
         init
         {
             if (value.Trim() != String.Empty)
-                _page = value.Trim();
+                _controller = value.Trim();
+        }
+    }
+    
+    public string Action
+    {
+        get => _action;
+        init
+        {
+            if (value.Trim() != String.Empty)
+                _action = value.Trim();
         }
     }
 

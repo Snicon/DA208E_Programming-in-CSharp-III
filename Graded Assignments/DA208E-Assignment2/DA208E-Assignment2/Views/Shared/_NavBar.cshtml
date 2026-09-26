@@ -12,6 +12,8 @@
                 <!-- Using the NavItem partial to display all nav items -->
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Home", "Index", "Home"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Event", "Index", "Event"))
+                @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Create", "Register guest"))
+                @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Index", "Guest list"))
                 @*
                 @await Html.PartialAsync("_NavItem", new NavItemModel("/Gallery", "Gallery"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("/Guests/Rsvp", "RSVP"))

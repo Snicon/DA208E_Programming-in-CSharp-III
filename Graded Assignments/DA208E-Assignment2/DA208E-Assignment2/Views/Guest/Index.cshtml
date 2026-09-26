@@ -1,0 +1,71 @@
+@model IReadOnlyList<Guest>
+<!-- Sixten Peterson (AQ9300) 2026-09-26 -->
+
+@{
+    ViewBag.Title = "Guest list";
+    
+    var message = TempData["Message"]?.ToString() ?? "";
+    var messageType = TempData["MessageType"]?.ToString() ?? "";
+}
+
+<div class="text-center container">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+    <p>View and manage the guest list below.</p>
+    
+    <!-- TODO: Refactor to use enum and make into component -->
+    @if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(messageType))
+    {
+        @if (messageType == "success")
+        {
+            <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                <p class="my-auto"><strong>Success!</strong> @message</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        else if (messageType == "danger")
+        {
+            <div class="alert alert-danger" role="alert">
+                <p><strong>Whoops!</strong> @message</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    }
+    
+    @if (Model.Count == 0)
+    {
+        <p>I'm sorry to say that your event doesn't seem quite popular (yet!), there are no guest RSVPs registered yet.</p>
+    }
+    else
+    {
+        <table class="table table-striped text-start">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <!-- TODO: Re-add RSVP data
+                <th scope="col">Attending</th>
+                <th scope="col">Message</th>
+                -->
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var guest in Model)
+            {
+                <tr>
+                    <td>@guest.Name</td>
+                    <td>@guest.Email</td>
+                    <!-- Re-add RSVP data -->
+                    <td>
+                        <!-- TODO: Fix links -->
+                        <a class="btn btn-sm btn-primary">Edit</a>
+                        <a class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <caption>Total Guests: @Model.Count</caption>
+        </table>
+    }
+</div>

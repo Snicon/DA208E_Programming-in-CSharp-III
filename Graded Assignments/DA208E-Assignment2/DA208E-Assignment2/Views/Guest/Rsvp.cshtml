@@ -28,6 +28,11 @@
                 </div>
             </div>
             <div class="mb-3">
+                <label asp-for="NumberOfAttendants" class="form-label">Number of attendants</label>
+                <input asp-for="NumberOfAttendants" class="form-control" min="1" max="6" type="number">
+                <span asp-validation-for="NumberOfAttendants" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <div class="form-check">
                     <input asp-for="Attending" class="form-check-input" type="radio" value="true" id="attending">
                     <label class="form-check-label" for="attending">

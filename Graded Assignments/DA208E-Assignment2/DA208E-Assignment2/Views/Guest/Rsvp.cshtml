@@ -1,0 +1,56 @@
+@model Guest
+
+@{
+    ViewBag.Title = "RSVP";
+}
+
+<div class="text-center container">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+
+    <!-- RSVP form below -->
+    <form method="POST" class="text-start">
+        <fieldset>
+            <legend>Submit your RSVP</legend>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" aria-describedby="nameHelpBlock">
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <div id="nameHelpBlock" class="form-text">
+                    Your full name. Must be at least 3 characters and no longer than 60 characters.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email address (optional)</label>
+                <input asp-for="Email" class="form-control" aria-describedby="emailHelpBlock">
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <div id="emailHelpBlock" class="form-text">
+                    Your e-mail address. This field is optional.
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input asp-for="Attending" class="form-check-input" type="radio" value="true" id="attending">
+                    <label class="form-check-label" for="attending">
+                        I will attend the event
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="Attending" class="form-check-input" type="radio" value="false" id="not_attending" checked>
+                    <label class="form-check-label" for="not_attending">
+                        I will not attend the event
+                    </label>
+                </div>
+                <span asp-validation-for="Attending" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Message" class="form-label">Message to the event hosts (optional)</label>
+                <textarea asp-for="Message" class="form-control" aria-describedby="messageHelpBlock"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+                <div id="messageHelpBlock" class="form-text">
+                    Feel free to write anything you would like for the hosts to know, or just wish them good luck! This field is optional but cannot be longer than 200 characters.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit RSVP</button>
+        </fieldset>
+    </form>
+</div>

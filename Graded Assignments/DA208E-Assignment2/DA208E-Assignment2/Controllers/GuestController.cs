@@ -37,6 +37,7 @@ public class GuestController : Controller
     public async Task<IActionResult> Create(Guest guest)
     {
         // The follwoing properties are not used in the create form, hence we are removing them form the validation
+        ModelState.Remove("NumberOfAttendants");
         ModelState.Remove("Attending");
         ModelState.Remove("Message");
         

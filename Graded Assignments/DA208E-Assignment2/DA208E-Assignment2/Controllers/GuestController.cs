@@ -20,9 +20,18 @@ public class GuestController : Controller
     
     public async Task<IActionResult> Index()
     {
-        var guests = await _context.Guests.ToListAsync();
+        var model = new GuestIndexViewModel()
+        {
+            Guests = await _context.Guests.ToListAsync(),
+            AttendingGuests = await _context.Guests
+                .Where(g => g.Attending == true)
+                .ToListAsync(),
+            NotAttendingGuests = await _context.Guests
+                .Where(g => g.Attending == false)
+                .ToListAsync()
+        };
         
-        return View(guests);
+        return View(model);
     }
     
     // GET: /Guest/Create
@@ -71,6 +80,7 @@ public class GuestController : Controller
         if (guest == null)
             return NotFound();
         
+        guest.NumberOfAttendants = model.NumberOfAttendants;
         guest.Attending = model.Attending;
         guest.Message = model.Message;
 

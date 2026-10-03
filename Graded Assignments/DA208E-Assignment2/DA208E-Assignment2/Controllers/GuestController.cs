@@ -107,6 +107,17 @@ public class GuestController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        
+        if (guest == null)
+            return NotFound();
+        
+        return View(guest);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
         var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);

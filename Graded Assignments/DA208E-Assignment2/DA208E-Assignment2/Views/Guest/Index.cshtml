@@ -74,7 +74,7 @@
                         <!-- TODO: Fix links -->
                         <a class="btn btn-sm btn-warning" asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id">Enter RSVP Form</a>
                         <a class="btn btn-sm btn-primary">Edit</a>
-                        <a class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             }
@@ -113,7 +113,7 @@
                         <!-- TODO: Fix links -->
                         <a class="btn btn-sm btn-warning" asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id">Enter RSVP Form</a>
                         <a class="btn btn-sm btn-primary">Edit</a>
-                        <a class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             }
@@ -165,7 +165,7 @@
                         <!-- TODO: Fix links -->
                         <a class="btn btn-sm btn-warning" asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id">Enter RSVP Form</a>
                         <a class="btn btn-sm btn-primary">Edit</a>
-                        <a class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             }

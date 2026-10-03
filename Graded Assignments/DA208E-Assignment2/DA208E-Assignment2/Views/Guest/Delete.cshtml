@@ -1,0 +1,63 @@
+@model Guest
+<!-- Sixten Peterson (AQ9300) 2026-10-03 -->
+
+@{
+    ViewData["Title"] = "Delete guest entry";
+}
+
+<div class="text-center container">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+    
+    <div class="card mt-5 col-sm-12 col-md-9 col-lg-6 mx-auto">
+        <h2 class="card-header">Deletion confirmation</h2>
+        
+        <!-- Card displaying data and asking for confirmation. -->
+        <div class="card-body">
+            <p class="card-text">
+                Are you sure you want to delete <em>@Model.Name</em>'s Guest and RSVP entry data?
+                There is no way to reverse this action later. Once it is gone, it's gone forever.
+            </p>
+            
+            <div>
+                <p class="card-text">
+                    By pressing "Delete", the following data will be deleted:
+                </p>
+                <dl>
+                    <dt>Name</dt>
+                    <dd>@Model.Name</dd>
+                    
+                    <dt>Email</dt>
+                    <dd>@Model.Email</dd>
+                    
+                    <dt>Phone number</dt>
+                    <dd>@Model.PhoneNumber</dd>
+                    
+                    <dt>Attending</dt>
+                    @switch (Model.Attending)
+                    {
+                        case true:
+                            <dd>Yes</dd>
+                            break;
+                        case false:
+                            <dd>No</dd>
+                            break;
+                        default:
+                            <dd>Awaiting RSVP</dd>
+                            break;
+                    }
+                    
+                    <dt>Message</dt>
+                    <dd>@Model.Message</dd>
+                </dl>
+            </div>
+            
+            <!-- Form used to delete if submit button is pressed -->
+            <!-- Adapted from the example form on page 1533 of Pro C# 10 with .NET 6 (Eleventh edition) by Andrew Troelsen & Phil Japikse -->
+            <form asp-action="DeleteConfirmed" class="d-flex justify-content-center gap-4">
+                <input type="hidden" asp-for="@Model.Id" />
+                <button type="submit" class="btn btn-danger mt-4">Delete</button>
+                <a asp-controller="Guest" asp-action="Index" class="btn btn-secondary mt-4">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

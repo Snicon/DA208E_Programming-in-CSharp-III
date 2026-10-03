@@ -105,4 +105,40 @@ public class GuestController : Controller
 
     return View(model);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        
+        if (guest == null)
+            return NotFound();
+        
+        return View(guest);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+
+        if (guest == null)
+            return NotFound();
+
+        try
+        {
+            _context.Guests.Remove(guest);
+            await _context.SaveChangesAsync();
+            
+            TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
+            TempData["Message"] = "Guest successfully deleted."; // Setting relevant message, which is used for the same as above
+        }
+        catch (DbUpdateException)
+        {
+            TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
+            TempData["Message"] = "Failed to delete guest."; // Same as above
+        }
+        
+        return RedirectToAction(nameof(Index));
+    }
 }

@@ -107,6 +107,47 @@ public class GuestController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        
+        if(guest == null)
+            return NotFound();
+        
+        return View(guest);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditGuest(int id)
+    {
+        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        
+        if (guest == null)
+            return NotFound();
+
+        // For reference: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-10.0#update-the-edit-page
+        if (await TryUpdateModelAsync<Guest>(
+                guest,
+                "",
+                g => g.Name, g => g.Email, g => g.PhoneNumber))
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
+                TempData["Message"] = "Guest successfully updated."; // Setting relevant message, which is used for the same as above
+            }
+            catch (DbUpdateException)
+            {
+                TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
+                TempData["Message"] = "Failed to update guest."; // Same as above
+            }
+        }
+        
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
         var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);

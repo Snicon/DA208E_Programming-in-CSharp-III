@@ -1,0 +1,42 @@
+@model Guest
+
+@{
+    ViewData["Title"] = "Edit guest data";
+}
+
+<div class="text-center container">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+
+    <!-- Edit RSVP form -->
+    <form asp-action="EditGuest" class="text-start">
+        <input type="hidden" asp-for="@Model.Id" />
+        <fieldset>
+            <legend>Update your guest data (@Model.Name)</legend>
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label"></label>
+                <input asp-for="@Model.Name" class="form-control" aria-describedby="nameHelpBlock">
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                <div id="nameHelpBlock" class="form-text">
+                    Your full name. Must be at least 3 characters and no longer than 60 characters.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Email" class="form-label">Email address (optional)</label>
+                <input asp-for="@Model.Email" class="form-control" aria-describedby="emailHelpBlock">
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                <div id="emailHelpBlock" class="form-text">
+                    Your e-mail address. This field is optional.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label">Phone number (optional)</label>
+                <input asp-for="PhoneNumber" class="form-control" aria-describedby="phoneNumberHelpBlock">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <div id="phoneNumberHelpBlock" class="form-text">
+                    Your phone number. This field is optional.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes to Guest data</button>
+        </fieldset>
+    </form>
+</div>

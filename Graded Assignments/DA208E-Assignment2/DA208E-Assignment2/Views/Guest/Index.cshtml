@@ -12,7 +12,6 @@
     <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
     <p>View and manage the guest list below.</p>
     
-    <!-- TODO: Refactor to use enum and make into component -->
     @if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(messageType))
     {
         @if (messageType == "success")
@@ -71,9 +70,8 @@
                     }
                     <td>@guest.Message</td>
                     <td>
-                        <!-- TODO: Fix links -->
-                        <a class="btn btn-sm btn-warning" asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id">Enter RSVP Form</a>
-                        <a class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
                         <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
@@ -110,9 +108,8 @@
                     <td>@guest.PhoneNumber</td>
                     <td>@guest.Message</td>
                     <td>
-                        <!-- TODO: Fix links -->
-                        <a class="btn btn-sm btn-warning" asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id">Enter RSVP Form</a>
-                        <a class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
                         <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
@@ -162,9 +159,8 @@
                     }
                     <td>@guest.Message</td>
                     <td>
-                        <!-- TODO: Fix links -->
-                        <a class="btn btn-sm btn-warning" asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id">Enter RSVP Form</a>
-                        <a class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
                         <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>

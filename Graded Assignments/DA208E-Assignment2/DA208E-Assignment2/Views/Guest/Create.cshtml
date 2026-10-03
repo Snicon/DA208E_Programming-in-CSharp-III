@@ -29,6 +29,14 @@
                     Your e-mail address. This field is optional.
                 </div>
             </div>
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label">Phone number (optional)</label>
+                <input asp-for="PhoneNumber" class="form-control" aria-describedby="phoneNumberHelpBlock">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <div id="phoneNumberHelpBlock" class="form-text">
+                    Your phone number. This field is optional.
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary">Create guest</button>
         </fieldset>
     </form>

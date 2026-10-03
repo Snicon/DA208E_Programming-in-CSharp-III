@@ -28,6 +28,14 @@
                 </div>
             </div>
             <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label">Phone number (optional)</label>
+                <input asp-for="PhoneNumber" class="form-control" aria-describedby="phoneNumberHelpBlock">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <div id="phoneNumberHelpBlock" class="form-text">
+                    Your phone number. This field is optional.
+                </div>
+            </div>
+            <div class="mb-3">
                 <label asp-for="NumberOfAttendants" class="form-label">Number of attendants</label>
                 <input asp-for="NumberOfAttendants" class="form-control" min="1" max="6" type="number">
                 <span asp-validation-for="NumberOfAttendants" class="text-danger"></span>

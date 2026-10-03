@@ -24,7 +24,6 @@ public class Guest
     [Range(1, 6)] // From p.165 in ASP.NET Core in action (Third edition) by Andrew Lock
     public int? NumberOfAttendants { get; set; }
     
-    // TODO: Required?
     public bool? Attending { get; set; }
     
     [StringLength(200)] // Maximum of 200 chars according to p.5 "Assignment 1 - Help" document

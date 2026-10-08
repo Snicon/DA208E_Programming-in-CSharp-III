@@ -6,37 +6,54 @@
 
 <div class="text-center container">
     <h1 class="display-4 emphasis">@ViewData["Title"] (@Model.Name)</h1>
+    <div class="row row-cols-2 mt-5">
+        <div class="col">
+            <h2 class="display-6">Guest data</h2>
+            <dl>
+                <dt>Name</dt>
+                <dd>@Model.Name</dd>
 
-    <div>
-        <p class="card-text">
-            Guest data
-        </p>
-        <dl>
-            <dt>Name</dt>
-            <dd>@Model.Name</dd>
-                    
-            <dt>Email</dt>
-            <dd>@Model.Email</dd>
-                    
-            <dt>Phone number</dt>
-            <dd>@Model.PhoneNumber</dd>
-                    
-            <dt>Attending</dt>
-            @switch (Model.Attending)
-            {
-                case true:
-                    <dd>Yes</dd>
-                    break;
-                case false:
-                    <dd>No</dd>
-                    break;
-                default:
-                    <dd>Awaiting RSVP</dd>
-                    break;
-            }
-                    
-            <dt>Message</dt>
-            <dd>@Model.Message</dd>
-        </dl>
+                <dt>Email</dt>
+                <dd>@Model.Email</dd>
+
+                <dt>Phone number</dt>
+                <dd>@Model.PhoneNumber</dd>
+            </dl>
+        </div>
+
+        <div class="col">
+            <h2 class="display-6">RSVP data</h2>
+            <dl>
+                <dt>Attending</dt>
+                @switch (Model.Attending)
+                {
+                    case true:
+                        <dd>Yes</dd>
+                        break;
+                    case false:
+                        <dd>No</dd>
+                        break;
+                    default:
+                        <dd>Awaiting RSVP</dd>
+                        break;
+                }
+
+                <dt>Number of attendants</dt>
+                <dd>@Model.NumberOfAttendants</dd>
+
+                <dt>Message</dt>
+                <dd>@Model.Message</dd>
+            </dl>
+        </div>
+        
+        <div class="col-12 mt-5">
+            <h2 class="display-6">Actions</h2>
+            <div class="btn-group mt-2">
+                <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@Model.Id" class="btn btn-warning">Enter RSVP Form for @Model.Name</a>
+                <a asp-controller="Guest" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="Guest" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                <a asp-controller="Guest" asp-action="Index" class="btn btn-success">View all guests</a>
+            </div>
+        </div>
     </div>
 </div>

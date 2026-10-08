@@ -236,6 +236,8 @@
     <p>
         Please let us know by <time datetime="@Model.RsvpByDate">@Model.RsvpByDate</time>. We hope you can make it!
     </p>
-    <!-- TODO: Link to RSVP -->
-    <a class="btn btn-primary">Complete your RSVP</a>
+    <ol class="mx-auto list-unstyled">
+        <li><a asp-controller="Guest" asp-action="Create">Register yourself as a guest</a></li>
+        <li><a asp-controller="Guest" asp-action="Index">Enter the RSVP form from the guest list</a></li>    
+    </ol>
 </section>

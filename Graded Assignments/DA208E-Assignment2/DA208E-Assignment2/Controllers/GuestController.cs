@@ -22,12 +22,16 @@ public class GuestController : Controller
     {
         var model = new GuestIndexViewModel()
         {
-            Guests = await _context.Guests.ToListAsync(),
+            Guests = await _context.Guests
+                .OrderBy(g => g.Name) // Sorting by name
+                .ToListAsync(),
             AttendingGuests = await _context.Guests
                 .Where(g => g.Attending == true)
+                .OrderBy(g => g.Name) // Sorting by name
                 .ToListAsync(),
             NotAttendingGuests = await _context.Guests
                 .Where(g => g.Attending == false)
+                .OrderBy(g => g.Name) // Sorting by name
                 .ToListAsync()
         };
         

@@ -1,0 +1,47 @@
+@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+
+    ViewData["AttendancePercentage"] = ((Model.AttendingGuests / (decimal)Model.RegisteredGuests) * 100).ToString("0.##");
+    ViewData["NonAttendancePercentage"] = ((Model.NonAttendingGuests / (decimal)Model.RegisteredGuests) * 100).ToString("0.##");
+    ViewData["AttendantsMinusGuests"] = Model.Attendants - Model.AttendingGuests;
+    ViewData["NotCompletedRSVP"] = ((Model.RegisteredGuests - Model.NonAttendingGuests - Model.AttendingGuests) / (decimal)Model.RegisteredGuests * 100).ToString("0.##");
+}
+
+<div class="container">
+    <h1 class="display-4 emphasis text-center">@ViewData["Title"]</h1>
+</div>
+
+<div class="mx-5">
+    <div class="row mt-5 row-gap-4">
+        <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
+            <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-primary">
+                <h2 class="h6 text-uppercase text-dark">Registered guests</h2>
+                <p class="m-0 h1 text-primary fw-bold">@Model.RegisteredGuests</p>
+                <p class="m-0 text-muted">@ViewData["NotCompletedRSVP"]% have not entered the rsvp form</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
+            <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-success">
+                <h2 class="h6 text-uppercase text-dark">Attending guests</h2>
+                <p class="m-0 h1 text-success fw-bold">@Model.AttendingGuests</p>
+                <p class="m-0 text-muted">@ViewData["AttendancePercentage"]% of all guests</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
+            <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-danger">
+                <h2 class="h6 text-uppercase text-dark">Non-attending guests</h2>
+                <p class="m-0 h1 text-danger fw-bold">@Model.NonAttendingGuests</p>
+                <p class="m-0 text-muted">@ViewData["NonAttendancePercentage"]% of all guests</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
+            <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-warning">
+                <h2 class="h6 text-uppercase text-dark">Attending attendants</h2>
+                <p class="m-0 h1 text-warning fw-bold">@Model.Attendants</p>
+                <p class="m-0 text-muted">@ViewData["AttendantsMinusGuests"] of which are accompanying registered guests</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@model Event
+
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="text-center container">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+
+    <!-- Event creation form below -->
+    <form method="POST" class="text-start">
+        <fieldset>
+            <legend>Create the event</legend>
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" aria-describedby="titleHelpBlock">
+                <span asp-validation-for="Title" class="text-danger"></span>
+                <div id="titleHelpBlock" class="form-text">
+                    The event title. Must be at least 3 characters and no longer than 50 characters.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="DateTime" class="form-label">Date & time</label>
+                <input asp-for="DateTime" class="form-control" aria-describedby="dateTimeHelpBlock">
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+                <div id="dateTimeHelpBlock" class="form-text">
+                    The date and time of the event.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <input asp-for="Description" class="form-control" aria-describedby="descriptionNumberHelpBlock">
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <div id="descriptionHelpBlock" class="form-text">
+                    Description of the event, may not be longer than 150 characters.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Create event</button>
+        </fieldset>
+    </form>
+</div>

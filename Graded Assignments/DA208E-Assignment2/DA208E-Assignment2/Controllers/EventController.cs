@@ -49,4 +49,41 @@ public class EventController : Controller
 
         return RedirectToAction(nameof(List));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var theEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+        
+        if (theEvent == null)
+            return NotFound();
+        
+        return View(theEvent);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var theEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+
+        if (theEvent == null)
+            return NotFound();
+
+        try
+        {
+            _context.Events.Remove(theEvent);
+            await _context.SaveChangesAsync();
+
+            TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
+            TempData["Message"] =
+                "Event successfully deleted."; // Setting relevant message, which is used for the same as above
+        }
+        catch (DbUpdateException)
+        {
+            TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
+            TempData["Message"] = "Failed to delete event."; // Same as above
+        }
+        
+        return RedirectToAction(nameof(List));
+    }
 }

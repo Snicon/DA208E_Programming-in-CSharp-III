@@ -1,0 +1,46 @@
+@model Event
+<!-- Sixten Peterson (AQ9300) 2026-10-08 -->
+
+@{
+    ViewData["Title"] = "Delete event";
+}
+
+<div class="text-center container">
+    <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+    
+    <div class="card mt-5 col-sm-12 col-md-9 col-lg-6 mx-auto">
+        <h2 class="card-header">Deletion confirmation</h2>
+        
+        <!-- Card displaying data and asking for confirmation. -->
+        <div class="card-body">
+            <p class="card-text">
+                Are you sure you want to delete the <em>@Model.Title</em> event data?
+                There is no way to reverse this action later. Once it is gone, it's gone forever.
+            </p>
+            
+            <div>
+                <p class="card-text">
+                    By pressing "Delete", the following data will be deleted:
+                </p>
+                <dl>
+                    <dt>Title</dt>
+                    <dd>@Model.Title</dd>
+                    
+                    <dt>Date & time</dt>
+                    <dd>@Model.DateTime</dd>
+                    
+                    <dt>Description</dt>
+                    <dd>@Model.Description</dd>
+                </dl>
+            </div>
+            
+            <!-- Form used to delete if submit button is pressed -->
+            <!-- Adapted from the example form on page 1533 of Pro C# 10 with .NET 6 (Eleventh edition) by Andrew Troelsen & Phil Japikse -->
+            <form asp-action="DeleteConfirmed" class="d-flex justify-content-center gap-4">
+                <input type="hidden" asp-for="@Model.Id" />
+                <button type="submit" class="btn btn-danger mt-4">Delete</button>
+                <a asp-controller="Event" asp-action="List" class="btn btn-secondary mt-4">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

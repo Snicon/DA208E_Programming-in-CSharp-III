@@ -1,5 +1,6 @@
 using DA208E_Assignment2.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DA208E_Assignment2.Controllers;
 
@@ -19,7 +20,12 @@ public class EventController : Controller
     
     public IActionResult Index()
     {
-        
         return View();
+    }
+
+    public async Task<IActionResult> List()
+    {
+        var events = await _context.Events.ToListAsync();
+        return View(events);
     }
 }

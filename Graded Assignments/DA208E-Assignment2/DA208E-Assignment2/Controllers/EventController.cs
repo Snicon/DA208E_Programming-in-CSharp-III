@@ -1,4 +1,4 @@
-using DA208E_Assignment2.Models;
+using DA208E_Assignment2.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DA208E_Assignment2.Controllers;
@@ -6,19 +6,20 @@ namespace DA208E_Assignment2.Controllers;
 public class EventController : Controller
 {
     #region Fields
-    private readonly Event _eventInfo;
+    private readonly ApplicationDbContext _context;
     #endregion
     
     #region Constructors
 
-    public EventController(Event eventInfo)
+    public EventController(ApplicationDbContext context)
     {
-        _eventInfo = eventInfo;
+        _context = context;
     }
     #endregion
     
     public IActionResult Index()
     {
-        return View(_eventInfo);
+        
+        return View();
     }
 }

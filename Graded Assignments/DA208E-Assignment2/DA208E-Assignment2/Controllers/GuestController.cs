@@ -9,13 +9,11 @@ public class GuestController : Controller
 {
     #region Fields
     private readonly ApplicationDbContext _context;
-    private readonly Event _eventInfo;
     #endregion
     
-    public GuestController(ApplicationDbContext context, Event eventInfo)
+    public GuestController(ApplicationDbContext context)
     {
         _context = context;
-        _eventInfo = eventInfo;
     }
     
     public async Task<IActionResult> Index()
@@ -98,13 +96,12 @@ public class GuestController : Controller
     {
         var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
 
-        if (guest == null || _eventInfo == null)
+        if (guest == null)
             return NotFound();
 
         var model = new ConfirmationViewModel
         {
             Guest = guest,
-            EventInfo = _eventInfo
         };
 
     return View(model);

@@ -7,20 +7,20 @@ namespace DA208E_Assignment2.Controllers;
 public class HomeController : Controller
 {
     #region Fields
-    private readonly Event _eventInfo;
+    //
     #endregion
     
     #region Constructors
 
-    public HomeController(Event eventInfo)
+    public HomeController()
     {
-        _eventInfo = eventInfo;
+        //
     }
     #endregion
     
     public IActionResult Index()
     {
-        return View(_eventInfo);
+        return View();
     }
 
     public IActionResult Privacy()

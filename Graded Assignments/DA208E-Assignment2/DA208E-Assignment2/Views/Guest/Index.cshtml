@@ -44,6 +44,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Phone number</th>
                 <th scope="col">Attending</th>
+                <th scope="col">Number of attendants</th>
                 <th scope="col">Message</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -67,6 +68,14 @@
                         default:
                             <td>Awaiting RSVP</td>
                             break;
+                    }
+                    @if (guest.NumberOfAttendants > 0)
+                    {
+                        <td>@guest.NumberOfAttendants</td>
+                    }
+                    else
+                    {
+                        <td>Unknown</td>
                     }
                     <td>@guest.Message</td>
                     <td>
@@ -135,6 +144,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Phone number</th>
                 <th scope="col">Attending</th>
+                <th scope="col">Number of attendants</th>
                 <th scope="col">Message</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -159,6 +169,7 @@
                             <td>Awaiting RSVP</td>
                             break;
                     }
+                    <td>@guest.NumberOfAttendants</td>
                     <td>@guest.Message</td>
                     <td>
                         <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>

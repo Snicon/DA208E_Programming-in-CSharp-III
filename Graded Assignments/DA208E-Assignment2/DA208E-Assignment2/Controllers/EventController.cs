@@ -33,6 +33,47 @@ public class EventController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var theEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+        
+        if (theEvent == null)
+            return NotFound();
+        
+        return View(theEvent);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditEvent(int id)
+    {
+        var theEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+        
+        if (theEvent == null)
+            return NotFound();
+
+        if (await TryUpdateModelAsync<Event>(
+                theEvent,
+                "",
+                e => e.Title, e => e.DateTime, e => e.Description))
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
+                TempData["Message"] =
+                    "Event successfully updated."; // Setting relevant message, which is used for the same as above
+            }
+            catch (DbUpdateException)
+            {
+                TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
+                TempData["Message"] = "Failed to update event."; // Same as above
+            }
+        }
+        
+        return RedirectToAction(nameof(List));
+    }
+
+    [HttpGet]
     public IActionResult Create()
     {
         return View();

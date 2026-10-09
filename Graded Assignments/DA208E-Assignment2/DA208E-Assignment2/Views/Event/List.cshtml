@@ -2,11 +2,32 @@
 
 @{
     ViewData["Title"] = "Manage Events";
+    
+    var message = TempData["Message"]?.ToString() ?? "";
+    var messageType = TempData["MessageType"]?.ToString() ?? "";
 }
 
 <div class="text-center container">
     <div>
         <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
+        
+        @if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(messageType))
+        {
+            @if (messageType == "success")
+            {
+                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                    <p class="my-auto"><strong>Success!</strong> @message</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (messageType == "danger")
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p><strong>Whoops!</strong> @message</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        }
     </div>
 
     <h2 class="mt-5">All events</h2>

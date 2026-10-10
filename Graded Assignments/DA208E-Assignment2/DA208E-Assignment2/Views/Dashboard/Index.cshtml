@@ -7,13 +7,37 @@
     ViewData["NonAttendancePercentage"] = ((Model.NonAttendingGuests / (decimal)Model.RegisteredGuests) * 100).ToString("0.##");
     ViewData["AttendantsMinusGuests"] = Model.Attendants - Model.AttendingGuests;
     ViewData["NotCompletedRSVP"] = ((Model.RegisteredGuests - Model.NonAttendingGuests - Model.AttendingGuests) / (decimal)Model.RegisteredGuests * 100).ToString("0.##");
+    
+    var message = TempData["Message"]?.ToString() ?? "";
+    var messageType = TempData["MessageType"]?.ToString() ?? "";
 }
 
 <div class="container">
+    <div>
+        @if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(messageType))
+        {
+            @if (messageType == "success")
+            {
+                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                    <p class="my-auto"><strong>Success!</strong> @message</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (messageType == "danger")
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p><strong>Whoops!</strong> @message</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        }
+    </div>
     <h1 class="display-4 emphasis text-center">@ViewData["Title"]</h1>
 </div>
 
-<div class="mx-5">
+<div class="m-5">
+    <h2 class="mt-5 text-center">Statistics overview</h2>
+    
     <div class="row mt-5 row-gap-4">
         <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
             <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-primary">
@@ -43,5 +67,52 @@
                 <p class="m-0 text-muted">@ViewData["AttendantsMinusGuests"] of which are accompanying registered guests</p>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="m-5">
+    <div>
+        <h2 class="mt-5 text-center">Event management</h2>
+        <div class="btn-group d-flex container mt-4">
+            <a class="btn btn-success" asp-controller="Event" asp-action="Create">Create new event</a>
+            <a class="btn btn-info" asp-controller="Event" asp-action="Index">View events on event page</a>
+        </div>
+    </div>
+    <div class="container mt-4">
+        @if (Model.Events.Count == 0)
+        {
+            <p>No events exist, <a asp-controller="Event" asp-action="Create">would you like to create an event</a>?</p>
+        }
+        else
+        {
+            <table class="table table-striped text-start">
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">DateTime</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var theEvent in Model.Events)
+                {
+                    <tr>
+                        <td>@theEvent.Title</td>
+                        <td>@theEvent.DateTime</td>
+                        <td>@theEvent.Description</td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-controller="Event" asp-action="Edit" asp-route-id="@theEvent.Id" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-controller="Event" asp-action="Delete" asp-route-id="@theEvent.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <caption>Total events: @Model.Events.Count</caption>
+            </table>
+        }
     </div>
 </div>

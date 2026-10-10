@@ -1,7 +1,6 @@
 using DA208E_Assignment2.Data;
 using DA208E_Assignment2.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace DA208E_Assignment2.Controllers;
@@ -20,15 +19,10 @@ public class EventController : Controller
     }
     #endregion
     
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> List()
-    {
-        var events = await _context.Events.ToListAsync();
+        var events = await _context.Events.OrderBy(e => e.DateTime).ToListAsync();
+        
         return View(events);
     }
 
@@ -70,7 +64,7 @@ public class EventController : Controller
             }
         }
         
-        return RedirectToAction(nameof(List));
+        return RedirectToAction("Index", "Dashboard");
     }
 
     [HttpGet]
@@ -88,7 +82,7 @@ public class EventController : Controller
         _context.Events.Add(newEvent);
         await _context.SaveChangesAsync();
 
-        return RedirectToAction(nameof(List));
+        return RedirectToAction("Index", "Dashboard");
     }
 
     [HttpGet]
@@ -125,6 +119,6 @@ public class EventController : Controller
             TempData["Message"] = "Failed to delete event."; // Same as above
         }
         
-        return RedirectToAction(nameof(List));
+        return RedirectToAction("Index", "Dashboard");
     }
 }

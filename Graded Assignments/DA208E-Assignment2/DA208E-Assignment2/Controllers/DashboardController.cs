@@ -21,13 +21,13 @@ public class DashboardController : Controller
     {
         var model = new DashboardViewModel()
         {
-            RegisteredGuests = await _context.Guests.CountAsync(),
+            RegisteredGuests = await _context.Guests.ToListAsync(),
             AttendingGuests = await _context.Guests
                 .Where(g => g.Attending == true)
-                .CountAsync(),
+                .ToListAsync(),
             NonAttendingGuests = await _context.Guests
                 .Where(g => g.Attending == false)
-                .CountAsync(),
+                .ToListAsync(),
             Attendants = await _context.Guests
                 .Where(g => g.Attending == true)
                 .SumAsync(g => g.NumberOfAttendants ?? 0), // ?? 0 is used to treat null as 0

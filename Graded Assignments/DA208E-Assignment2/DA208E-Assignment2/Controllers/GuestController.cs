@@ -60,7 +60,7 @@ public class GuestController : Controller
         _context.Guests.Add(guest);
         await _context.SaveChangesAsync();
         
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 
     [HttpGet]
@@ -156,7 +156,7 @@ public class GuestController : Controller
             }
         }
         
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 
     [HttpGet]
@@ -192,6 +192,6 @@ public class GuestController : Controller
             TempData["Message"] = "Failed to delete guest."; // Same as above
         }
         
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 }

@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Dashboard";
 
-    ViewData["AttendancePercentage"] = ((Model.AttendingGuests / (decimal)Model.RegisteredGuests) * 100).ToString("0.##");
-    ViewData["NonAttendancePercentage"] = ((Model.NonAttendingGuests / (decimal)Model.RegisteredGuests) * 100).ToString("0.##");
-    ViewData["AttendantsMinusGuests"] = Model.Attendants - Model.AttendingGuests;
-    ViewData["NotCompletedRSVP"] = ((Model.RegisteredGuests - Model.NonAttendingGuests - Model.AttendingGuests) / (decimal)Model.RegisteredGuests * 100).ToString("0.##");
+    ViewData["AttendancePercentage"] = ((Model.AttendingGuests.Count / (decimal)Model.RegisteredGuests.Count) * 100).ToString("0.##");
+    ViewData["NonAttendancePercentage"] = ((Model.NonAttendingGuests.Count / (decimal)Model.RegisteredGuests.Count) * 100).ToString("0.##");
+    ViewData["AttendantsMinusGuests"] = Model.Attendants - Model.AttendingGuests.Count;
+    ViewData["NotCompletedRSVP"] = ((Model.RegisteredGuests.Count - Model.NonAttendingGuests.Count - Model.AttendingGuests.Count) / (decimal)Model.RegisteredGuests.Count * 100).ToString("0.##");
     
     var message = TempData["Message"]?.ToString() ?? "";
     var messageType = TempData["MessageType"]?.ToString() ?? "";
@@ -42,21 +42,21 @@
         <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
             <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-primary">
                 <h2 class="h6 text-uppercase text-dark">Registered guests</h2>
-                <p class="m-0 h1 text-primary fw-bold">@Model.RegisteredGuests</p>
+                <p class="m-0 h1 text-primary fw-bold">@Model.RegisteredGuests.Count</p>
                 <p class="m-0 text-muted">@ViewData["NotCompletedRSVP"]% have not entered the rsvp form</p>
             </div>
         </div>
         <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
             <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-success">
                 <h2 class="h6 text-uppercase text-dark">Attending guests</h2>
-                <p class="m-0 h1 text-success fw-bold">@Model.AttendingGuests</p>
+                <p class="m-0 h1 text-success fw-bold">@Model.AttendingGuests.Count</p>
                 <p class="m-0 text-muted">@ViewData["AttendancePercentage"]% of all guests</p>
             </div>
         </div>
         <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 px-4">
             <div class="bg-light-subtle p-4 rounded-4 shadow-lg border-start border-5 border-danger">
                 <h2 class="h6 text-uppercase text-dark">Non-attending guests</h2>
-                <p class="m-0 h1 text-danger fw-bold">@Model.NonAttendingGuests</p>
+                <p class="m-0 h1 text-danger fw-bold">@Model.NonAttendingGuests.Count</p>
                 <p class="m-0 text-muted">@ViewData["NonAttendancePercentage"]% of all guests</p>
             </div>
         </div>
@@ -67,6 +67,196 @@
                 <p class="m-0 text-muted">@ViewData["AttendantsMinusGuests"] of which are accompanying registered guests</p>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="m-5">
+    <div>
+        <h2 class="mt-5 text-center">Guest management</h2>
+        <p class="text-center fst-italic">Guests are sorted by their name.</p>
+        <div class="btn-group d-flex container mt-4">
+            <a class="btn btn-success" asp-controller="Guest" asp-action="Create">Register new guest</a>
+            <a class="btn btn-info" asp-controller="Guest" asp-action="Index">View guest list</a>
+        </div>
+    </div>
+    <div class="container">
+            @if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(messageType))
+    {
+        @if (messageType == "success")
+        {
+            <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                <p class="my-auto"><strong>Success!</strong> @message</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        else if (messageType == "danger")
+        {
+            <div class="alert alert-danger" role="alert">
+                <p><strong>Whoops!</strong> @message</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    }
+    
+    <h3 class="mt-5 text-center">All guests</h3>
+    @if (Model.RegisteredGuests.Count == 0)
+    {
+        <p>I'm sorry to say that your event doesn't seem quite popular (yet!), there are no guest RSVPs registered yet.</p>
+    }
+    else
+    {
+        <table class="table table-striped text-start">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Attending</th>
+                <th scope="col">Number of attendants</th>
+                <th scope="col">Message</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var guest in Model.RegisteredGuests)
+            {
+                <tr>
+                    <td>@guest.Name</td>
+                    <td>@guest.Email</td>
+                    <td>@guest.PhoneNumber</td>
+                    @switch (guest.Attending)
+                    {
+                        case true:
+                            <td>Yes</td>
+                            break;
+                        case false:
+                            <td>No</td>
+                            break;
+                        default:
+                            <td>Awaiting RSVP</td>
+                            break;
+                    }
+                    @if (guest.NumberOfAttendants > 0)
+                    {
+                        <td>@guest.NumberOfAttendants</td>
+                    }
+                    else
+                    {
+                        <td>Unknown</td>
+                    }
+                    <td>@guest.Message</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                            <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
+                            <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <caption>Total guests: @Model.RegisteredGuests.Count</caption>
+        </table>
+    }
+    
+    <h3 class="mt-5 text-center">Not attending</h3>
+    @if (Model.NonAttendingGuests.Count == 0)
+    {
+        <p>It seems like no guests have entered that they are not participating, or no one has filled out the RSVP form yet. Or maybe your wedding is about to be packed!</p>
+    }
+    else
+    {
+        <table class="table table-striped text-start">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Message</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var guest in Model.NonAttendingGuests)
+            {
+                <tr>
+                    <td>@guest.Name</td>
+                    <td>@guest.Email</td>
+                    <td>@guest.PhoneNumber</td>
+                    <td>@guest.Message</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                            <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
+                            <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <caption>Total guests not attending: @Model.NonAttendingGuests.Count</caption>
+        </table>
+    }
+    
+    <h3 class="mt-5 text-center">Attending</h3>
+    @if (Model.NonAttendingGuests.Count == 0)
+    {
+        <p>It seems like no guests have entered that they are not participating, or no one has filled out the RSVP form yet. Or maybe your wedding is about to be packed!</p>
+    }
+    else
+    {
+        <table class="table table-striped text-start">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Attending</th>
+                <th scope="col">Number of attendants</th>
+                <th scope="col">Message</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var guest in Model.AttendingGuests)
+            {
+                <tr>
+                    <td>@guest.Name</td>
+                    <td>@guest.Email</td>
+                    <td>@guest.PhoneNumber</td>
+                    @switch (guest.Attending)
+                    {
+                        case true:
+                            <td>Yes</td>
+                            break;
+                        case false:
+                            <td>No</td>
+                            break;
+                        default:
+                            <td>Awaiting RSVP</td>
+                            break;
+                    }
+                    <td>@guest.NumberOfAttendants</td>
+                    <td>@guest.Message</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                            <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
+                            <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <caption>Total guests attending: @Model.AttendingGuests.Count</caption>
+        </table>
+    }
     </div>
 </div>
 

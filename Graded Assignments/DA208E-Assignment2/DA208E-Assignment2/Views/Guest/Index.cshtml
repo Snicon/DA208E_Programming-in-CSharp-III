@@ -41,11 +41,8 @@
             <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone number</th>
                 <th scope="col">Attending</th>
                 <th scope="col">Number of attendants</th>
-                <th scope="col">Message</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -55,8 +52,6 @@
             {
                 <tr>
                     <td>@guest.Name</td>
-                    <td>@guest.Email</td>
-                    <td>@guest.PhoneNumber</td>
                     @switch (guest.Attending)
                     {
                         case true:
@@ -77,110 +72,13 @@
                     {
                         <td>Unknown</td>
                     }
-                    <td>@guest.Message</td>
                     <td>
                         <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
-                        <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-success">View details</a>
-                        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
-                        <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             }
             </tbody>
             <caption>Total guests: @Model.Guests.Count</caption>
-        </table>
-    }
-    
-    <h2 class="mt-5">Not attending</h2>
-    @if (Model.NotAttendingGuests.Count == 0)
-    {
-        <p>It seems like no guests have entered that they are not participating, or no one has filled out the RSVP form yet. Or maybe your wedding is about to be packed!</p>
-    }
-    else
-    {
-        <table class="table table-striped text-start">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Message</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @foreach (var guest in Model.NotAttendingGuests)
-            {
-                <tr>
-                    <td>@guest.Name</td>
-                    <td>@guest.Email</td>
-                    <td>@guest.PhoneNumber</td>
-                    <td>@guest.Message</td>
-                    <td>
-                        <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
-                        <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-success">View details</a>
-                        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
-                        <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-            <caption>Total guests not attending: @Model.NotAttendingGuests.Count</caption>
-        </table>
-    }
-    
-    <h2 class="mt-5">Attending</h2>
-    @if (Model.NotAttendingGuests.Count == 0)
-    {
-        <p>It seems like no guests have entered that they are not participating, or no one has filled out the RSVP form yet. Or maybe your wedding is about to be packed!</p>
-    }
-    else
-    {
-        <table class="table table-striped text-start">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Attending</th>
-                <th scope="col">Number of attendants</th>
-                <th scope="col">Message</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @foreach (var guest in Model.AttendingGuests)
-            {
-                <tr>
-                    <td>@guest.Name</td>
-                    <td>@guest.Email</td>
-                    <td>@guest.PhoneNumber</td>
-                    @switch (guest.Attending)
-                    {
-                        case true:
-                            <td>Yes</td>
-                            break;
-                        case false:
-                            <td>No</td>
-                            break;
-                        default:
-                            <td>Awaiting RSVP</td>
-                            break;
-                    }
-                    <td>@guest.NumberOfAttendants</td>
-                    <td>@guest.Message</td>
-                    <td>
-                        <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
-                        <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-success">View details</a>
-                        <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
-                        <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-            <caption>Total guests attending: @Model.AttendingGuests.Count</caption>
         </table>
     }
 </div>

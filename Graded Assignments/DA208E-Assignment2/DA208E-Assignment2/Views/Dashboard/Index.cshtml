@@ -105,60 +105,62 @@
     }
     else
     {
-        <table class="table table-striped text-start">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Attending</th>
-                <th scope="col">Number of attendants</th>
-                <th scope="col">Message</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @foreach (var guest in Model.RegisteredGuests)
-            {
+        <div class="table-responsive">
+            <table class="table table-striped text-start">
+                <thead>
                 <tr>
-                    <td>@guest.Name</td>
-                    <td>@guest.Email</td>
-                    <td>@guest.PhoneNumber</td>
-                    @switch (guest.Attending)
-                    {
-                        case true:
-                            <td>Yes</td>
-                            break;
-                        case false:
-                            <td>No</td>
-                            break;
-                        default:
-                            <td>Awaiting RSVP</td>
-                            break;
-                    }
-                    @if (guest.NumberOfAttendants > 0)
-                    {
-                        <td>@guest.NumberOfAttendants</td>
-                    }
-                    else
-                    {
-                        <td>Unknown</td>
-                    }
-                    <td>@guest.Message</td>
-                    <td>
-                        <div class="btn-group">
-                            <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
-                            <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
-                            <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
-                            <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
-                        </div>
-                    </td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Attending</th>
+                    <th scope="col">Number of attendants</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Actions</th>
                 </tr>
-            }
-            </tbody>
-            <caption>Total guests: @Model.RegisteredGuests.Count</caption>
-        </table>
+                </thead>
+                <tbody>
+
+                @foreach (var guest in Model.RegisteredGuests)
+                {
+                    <tr>
+                        <td>@guest.Name</td>
+                        <td>@guest.Email</td>
+                        <td>@guest.PhoneNumber</td>
+                        @switch (guest.Attending)
+                        {
+                            case true:
+                                <td>Yes</td>
+                                break;
+                            case false:
+                                <td>No</td>
+                                break;
+                            default:
+                                <td>Awaiting RSVP</td>
+                                break;
+                        }
+                        @if (guest.NumberOfAttendants > 0)
+                        {
+                            <td>@guest.NumberOfAttendants</td>
+                        }
+                        else
+                        {
+                            <td>Unknown</td>
+                        }
+                        <td>@guest.Message</td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                                <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
+                                <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <caption>Total guests: @Model.RegisteredGuests.Count</caption>
+            </table>
+        </div>
     }
     
     <h3 class="mt-5 text-center">Not attending</h3>
@@ -168,38 +170,40 @@
     }
     else
     {
-        <table class="table table-striped text-start">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Message</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @foreach (var guest in Model.NonAttendingGuests)
-            {
+        <div class="table-responsive">
+            <table class="table table-striped text-start">
+                <thead>
                 <tr>
-                    <td>@guest.Name</td>
-                    <td>@guest.Email</td>
-                    <td>@guest.PhoneNumber</td>
-                    <td>@guest.Message</td>
-                    <td>
-                        <div class="btn-group">
-                            <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
-                            <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
-                            <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
-                            <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
-                        </div>
-                    </td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Actions</th>
                 </tr>
-            }
-            </tbody>
-            <caption>Total guests not attending: @Model.NonAttendingGuests.Count</caption>
-        </table>
+                </thead>
+                <tbody>
+
+                @foreach (var guest in Model.NonAttendingGuests)
+                {
+                    <tr>
+                        <td>@guest.Name</td>
+                        <td>@guest.Email</td>
+                        <td>@guest.PhoneNumber</td>
+                        <td>@guest.Message</td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-controller="Guest" asp-action="Rsvp" asp-route-id="@guest.Id" class="btn btn-sm btn-warning">Enter RSVP Form</a>
+                                <a asp-controller="Guest" asp-action="Details" asp-route-id="@guest.Id" class="btn btn-sm btn-info">View details</a>
+                                <a asp-controller="Guest" asp-action="Edit" asp-route-id="@guest.Id" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-controller="Guest" asp-action="Delete" asp-route-id="@guest.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <caption>Total guests not attending: @Model.NonAttendingGuests.Count</caption>
+            </table>
+        </div>
     }
     
     <h3 class="mt-5 text-center">Attending</h3>
@@ -209,7 +213,8 @@
     }
     else
     {
-        <table class="table table-striped text-start">
+        <div class="table-responsive">
+                    <table class="table table-striped text-start table-responsive">
             <thead>
             <tr>
                 <th scope="col">Name</th>
@@ -256,6 +261,7 @@
             </tbody>
             <caption>Total guests attending: @Model.AttendingGuests.Count</caption>
         </table>
+        </div>
     }
     </div>
 </div>
@@ -275,34 +281,36 @@
         }
         else
         {
-            <table class="table table-striped text-start">
-                <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">DateTime</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                @foreach (var theEvent in Model.Events)
-                {
+            <div class="table-responsive">
+                <table class="table table-striped text-start">
+                    <thead>
                     <tr>
-                        <td>@theEvent.Title</td>
-                        <td>@theEvent.DateTime</td>
-                        <td>@theEvent.Description</td>
-                        <td>
-                            <div class="btn-group">
-                                <a asp-controller="Event" asp-action="Edit" asp-route-id="@theEvent.Id" class="btn btn-sm btn-primary">Edit</a>
-                                <a asp-controller="Event" asp-action="Delete" asp-route-id="@theEvent.Id" class="btn btn-sm btn-danger">Delete</a>
-                            </div>
-                        </td>
+                        <th scope="col">Title</th>
+                        <th scope="col">DateTime</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
                     </tr>
-                }
-                </tbody>
-                <caption>Total events: @Model.Events.Count</caption>
-            </table>
+                    </thead>
+                    <tbody>
+
+                    @foreach (var theEvent in Model.Events)
+                    {
+                        <tr>
+                            <td>@theEvent.Title</td>
+                            <td>@theEvent.DateTime</td>
+                            <td>@theEvent.Description</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-controller="Event" asp-action="Edit" asp-route-id="@theEvent.Id" class="btn btn-sm btn-primary">Edit</a>
+                                    <a asp-controller="Event" asp-action="Delete" asp-route-id="@theEvent.Id" class="btn btn-sm btn-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                    <caption>Total events: @Model.Events.Count</caption>
+                </table>
+            </div>
         }
     </div>
 </div>

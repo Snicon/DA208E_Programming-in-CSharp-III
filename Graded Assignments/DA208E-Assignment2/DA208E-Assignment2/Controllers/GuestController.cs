@@ -67,6 +67,9 @@ public class GuestController : Controller
     public async Task<IActionResult> Rsvp(int id)
     {
         var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+
+        if (guest == null)
+            return NotFound();
         
         return View(guest);
     }

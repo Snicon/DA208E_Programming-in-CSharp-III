@@ -72,6 +72,29 @@ namespace DA208E_Assignment2.Migrations
 
                     b.ToTable("Guests");
                 });
+
+            modelBuilder.Entity("DA208E_Assignment2.Models.UsefulInformation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsefulInformation");
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -74,4 +74,40 @@ public class UsefulInformationController : Controller
         
         return RedirectToAction("Index", "Dashboard");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var information = await _context.UsefulInformation.FirstOrDefaultAsync(i => i.Id == id);
+        
+        if (information == null)
+            return NotFound();
+        
+        return View(information);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var information = await _context.UsefulInformation.FirstOrDefaultAsync(i => i.Id == id);
+
+        if (information == null)
+            return NotFound();
+
+        try
+        {
+            _context.UsefulInformation.Remove(information);
+            await _context.SaveChangesAsync();
+            
+            TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
+            TempData["Message"] = "Useful information entry successfully deleted."; // Setting relevant message, which is used for the same as above
+        }
+        catch (DbUpdateException)
+        {
+            TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
+            TempData["Message"] = "Failed to delete useful information entry."; // Same as above
+        }
+        
+        return RedirectToAction("Index", "Dashboard");
+    }
 }

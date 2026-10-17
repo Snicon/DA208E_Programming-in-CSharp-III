@@ -10,8 +10,10 @@ public class UsefulInformation
     [Required]
     public required string Icon { get; set; }
     [Required]
+    [StringLength(30, MinimumLength = 3)]
     public required string Title { get; set; }
     [Required]
+    [StringLength(150, MinimumLength = 20)]
     public required string Description { get; set; }
     #endregion
 }

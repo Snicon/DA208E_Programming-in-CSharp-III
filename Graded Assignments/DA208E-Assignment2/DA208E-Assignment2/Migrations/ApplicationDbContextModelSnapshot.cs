@@ -81,6 +81,7 @@ namespace DA208E_Assignment2.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Icon")
@@ -89,6 +90,7 @@ namespace DA208E_Assignment2.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -7,4 +7,5 @@ public class DashboardViewModel
     public List<Guest> NonAttendingGuests { get; set; }
     public int Attendants { get; set; }
     public List<Event> Events { get; set; }
+    public List<UsefulInformation> UsefulInformation { get; set; }
 }

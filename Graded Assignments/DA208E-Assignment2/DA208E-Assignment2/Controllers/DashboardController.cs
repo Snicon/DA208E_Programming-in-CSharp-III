@@ -31,7 +31,8 @@ public class DashboardController : Controller
             Attendants = await _context.Guests
                 .Where(g => g.Attending == true)
                 .SumAsync(g => g.NumberOfAttendants ?? 0), // ?? 0 is used to treat null as 0
-            Events = await _context.Events.ToListAsync()
+            Events = await _context.Events.ToListAsync(),
+            UsefulInformation = await _context.UsefulInformation.ToListAsync()
         };
         
         return View(model);

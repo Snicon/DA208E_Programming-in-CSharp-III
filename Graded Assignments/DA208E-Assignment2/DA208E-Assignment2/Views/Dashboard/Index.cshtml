@@ -322,6 +322,47 @@
                 <a class="btn btn-success" asp-controller="UsefulInformation" asp-action="Create">Create new information entry</a>
                 <a class="btn btn-info" asp-controller="Home" asp-action="Index">View useful information on home page</a>
             </div>
+            <div class="container mt-4">
+                @if (Model.UsefulInformation.Count == 0)
+                {
+                    <p>No useful information exist, <a asp-controller="UsefulInformation" asp-action="Create">would you like to create an entry</a>?</p>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped text-start">
+                            <thead>
+                            <tr>
+                                <th scope="col">Icon</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach (var information in Model.UsefulInformation)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="icons/@information.Icon" alt="@information.Icon" width="60px">
+                                    </td>
+                                    <td>@information.Title</td>
+                                    <td>@information.Description</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a asp-controller="UsefulInformation" asp-action="Edit" asp-route-id="@information.Id" class="btn btn-sm btn-primary">Edit</a>
+                                            <a asp-controller="UsefulInformation" asp-action="Delete" asp-route-id="@information.Id" class="btn btn-sm btn-danger">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                            <caption>Total information entries: @Model.UsefulInformation.Count</caption>
+                        </table>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>

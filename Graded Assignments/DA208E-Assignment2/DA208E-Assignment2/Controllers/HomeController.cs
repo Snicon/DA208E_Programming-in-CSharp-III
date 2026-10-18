@@ -1,26 +1,30 @@
 using System.Diagnostics;
+using DA208E_Assignment2.Data;
 using Microsoft.AspNetCore.Mvc;
 using DA208E_Assignment2.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DA208E_Assignment2.Controllers;
 
 public class HomeController : Controller
 {
     #region Fields
-    //
+    private readonly ApplicationDbContext _context;
     #endregion
     
     #region Constructors
 
-    public HomeController()
+    public HomeController(ApplicationDbContext context)
     {
-        //
+        _context = context;
     }
     #endregion
     
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var information = await _context.UsefulInformation.ToListAsync();
+        
+        return View(information);
     }
 
     public IActionResult Privacy()

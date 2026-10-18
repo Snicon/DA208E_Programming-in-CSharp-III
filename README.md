@@ -39,10 +39,24 @@ The assignment intends to give practical experience with:
 - Routing
 - Lambda expressions
 
-### Assignment 3 - ...
+### Assignment 3 - MVC, LINQ (RESTful Web APIs)
+Assignment 3 takes the project from the prior assignments and introduces web APIs along with identity and security.
+
+The assignment intents to give practical experience with:
+- RESTful Web APIs
+- Client-server architecture
+- JSON data exchange and serialization
+- ViewModels and presentation models
+- Authentication and authorization
+- ASP.NET Core Identity
+- Roles and access control
+- Asynchronous programming using async and await
+- Data projections using ViewModels and anonymous types
+
+### Assignment 4 - Full-Stack Development with Blazor & WebAPI
 To be added.
 
-### Assignment 4 - ...
+### Assignment 5 - WPF, Unit Testing, MSTest, NUnit and xUnit
 To be added.
 
 More assignments will be added as the course progresses
@@ -52,13 +66,18 @@ More assignments will be added as the course progresses
 ### Assignments
 
 |Assignment|Handed in|Grade|Best possible grade|
-|------------|-------|-|-|
-|Assignment 1|&#9745;|-|A|
-|Assignment 2|&#9744;|-|A|
-|Quiz 1      |&#9745;|A|A|
-|Assignment 4|&#9744;|-|A|
-|Assignment 5|&#9744;|-|A|
-|Quiz 2      |&#9744;|-|A|
+|-----------------|-------|-|-|
+|Assignment 1     |&#9745;|A|A|
+|Assignment 2     |&#9745;|-|A|
+|Quiz 1           |&#9745;|A|A|
+|Assignment 3     |&#9744;|-|A|
+|Assignment 4     |&#9744;|-|A|
+|Quiz 2           |&#9744;|-|A|
+|Assignment 5     |&#9744;|-|A|
+|Quiz 3           |&#9744;|-|A|
+|Assignment 6, pt1|&#9744;|-|A|
+|Assignment 6, pt2|&#9744;|-|A|
+
 
 ### Final grade
 To be determined...

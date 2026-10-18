@@ -1,11 +1,11 @@
 // Sixten Peterson (AQ9300) 2026-10-08
-
 using System.ComponentModel.DataAnnotations;
 
 namespace DA208E_Assignment2.Models;
 
 /// <summary>
-/// TODO: Update comment
+/// The event model represents an event taking place within the wedding event. This data is presented in the event
+/// schedule.
 /// </summary>
 public class Event
 {

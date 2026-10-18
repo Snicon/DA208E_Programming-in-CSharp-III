@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DA208E_Assignment2.Models;
 
+/// <summary>
+/// Represents a piece of information about the wedding in general that may be useful for the guests to know.
+/// An icon is included along the title and description to make it more attractive in the website design.
+/// </summary>
 public class UsefulInformation
 {
     #region Properties

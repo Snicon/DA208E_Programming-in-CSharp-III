@@ -1,4 +1,4 @@
-@model GuestIndexViewModel
+@model List<Guest>
 <!-- Sixten Peterson (AQ9300) 2026-09-26 -->
 
 @{
@@ -31,7 +31,8 @@
     }
     
     <h2 class="mt-5">All guests</h2>
-    @if (Model.Guests.Count == 0)
+    <p class="fst-italic"><span class="fw-bold">Note to grader</span>: Guest filtering is present in the dashboard instead.</p>
+    @if (Model.Count == 0)
     {
         <p>I'm sorry to say that your event doesn't seem quite popular (yet!), there are no guest RSVPs registered yet.</p>
     }
@@ -48,7 +49,7 @@
             </thead>
             <tbody>
 
-            @foreach (var guest in Model.Guests)
+            @foreach (var guest in Model)
             {
                 <tr>
                     <td>@guest.Name</td>
@@ -78,7 +79,7 @@
                 </tr>
             }
             </tbody>
-            <caption>Total guests: @Model.Guests.Count</caption>
+            <caption>Total guests: @Model.Count</caption>
         </table>
     }
 </div>

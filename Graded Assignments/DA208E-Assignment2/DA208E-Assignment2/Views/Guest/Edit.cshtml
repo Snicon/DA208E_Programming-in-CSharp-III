@@ -8,7 +8,7 @@
     <h1 class="display-4 emphasis">@ViewData["Title"]</h1>
 
     <!-- Edit RSVP form -->
-    <form asp-action="EditGuest" class="text-start">
+    <form asp-action="Edit" class="text-start">
         <input type="hidden" asp-for="@Model.Id" />
         <fieldset>
             <legend>Update your guest data (@Model.Name)</legend>

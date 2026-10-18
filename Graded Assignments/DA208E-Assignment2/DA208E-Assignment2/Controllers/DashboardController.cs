@@ -1,3 +1,4 @@
+// Sixten Peterson (AQ9300) 2026-10-18
 using DA208E_Assignment2.Data;
 using DA208E_Assignment2.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DA208E_Assignment2.Controllers;
 
+/// <summary>
+/// A basic controller class for the dashboard, consisting of a simple index action. It uses the database to fetch
+/// relevant data.
+/// </summary>
 public class DashboardController : Controller
 {
     #region Fields
@@ -15,8 +20,15 @@ public class DashboardController : Controller
     {
         _context = context;
     }
-    
-    // GET
+
+    #region Controller action(s)
+    /// <summary>
+    /// The Index controller action of the dashboard, a get request to the dashboard page (index) that fetches the
+    /// relevant data from the database and "compiles" it into the DashboardViewModel and returns the view along with
+    /// the view model.
+    /// </summary>
+    /// <returns>The dashboard index view along with the view model</returns>
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         var model = new DashboardViewModel()
@@ -37,4 +49,5 @@ public class DashboardController : Controller
         
         return View(model);
     }
+    #endregion
 }

@@ -245,13 +245,8 @@ public class GuestController : Controller
         guest.Message = model.Message;
 
         await _context.SaveChangesAsync();
-
-        var confirmationViewModel = new ConfirmationViewModel
-        {
-            Guest = guest,
-        };
         
-        return RedirectToAction("Confirmation", confirmationViewModel);
+        return RedirectToAction("Confirmation", "Guest", new { id = guest.Id });
     }
     
     /// <summary>

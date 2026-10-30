@@ -68,7 +68,7 @@ More assignments will be added as the course progresses
 |Assignment|Handed in|Grade|Best possible grade|
 |-----------------|-------|-|-|
 |Assignment 1     |&#9745;|A|A|
-|Assignment 2     |&#9745;|-|A|
+|Assignment 2     |&#9745;|A|A|
 |Quiz 1           |&#9745;|A|A|
 |Assignment 3     |&#9744;|-|A|
 |Assignment 4     |&#9744;|-|A|

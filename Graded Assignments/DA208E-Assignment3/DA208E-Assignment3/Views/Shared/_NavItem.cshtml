@@ -1,0 +1,9 @@
+<!-- Sixten Peterson (AQ9300) 2026-09-25 -->
+@model NavItemModel;
+
+<!-- Simple nav item partial, for better reusability. Sets active class if page is active. -->
+<li class="nav-item">
+    <a asp-controller="@Model.Controller" asp-action="@Model.Action" class="nav-link">
+        @Model.Label
+    </a>
+</li>

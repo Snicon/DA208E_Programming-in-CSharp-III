@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - DA208E_Assignment2</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/DA208E_Assignment2.styles.css" asp-append-version="true"/>
+</head>
+<body>
+<header>
+    <!-- Using the _NavBar partial to show a navbar -->
+    @await Html.PartialAsync("_NavBar")
+</header>
+
+<div class="page">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <!-- Using the _Footer partial to show a footer -->
+    @await Html.PartialAsync("_Footer")
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

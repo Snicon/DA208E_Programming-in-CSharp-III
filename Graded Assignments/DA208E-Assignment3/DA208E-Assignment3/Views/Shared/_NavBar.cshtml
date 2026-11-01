@@ -15,11 +15,32 @@
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Create", "Register guest"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Index", "Guest list"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Dashboard", "Index", "Dashboard"))
-                @*
-                @await Html.PartialAsync("_NavItem", new NavItemModel("/Gallery", "Gallery"))
-                @await Html.PartialAsync("_NavItem", new NavItemModel("/Guests/Rsvp", "RSVP"))
-                @await Html.PartialAsync("_NavItem", new NavItemModel("/Guests/Index", "Guests"))
-                *@
+                @if (User.Identity!.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" class="nav-link">
+                            My Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Identity" asp-page="/Account/Logout" class="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-area="Identity" asp-page="/Account/Register" class="nav-link">
+                            Register
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Identity" asp-page="/Account/Login" class="nav-link">
+                            Login
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
     </div>

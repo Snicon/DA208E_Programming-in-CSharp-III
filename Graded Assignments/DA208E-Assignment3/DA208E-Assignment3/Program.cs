@@ -1,10 +1,12 @@
 using DA208E_Assignment3.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages(); // Needed for the scaffolded identity pages
 
 // Registering the db context as a service
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
@@ -32,6 +34,8 @@ app.UseAuthentication(); // Adds the authentication middleware
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapRazorPages(); // Needed for the scaffolded identity pages
 
 app.MapControllerRoute(
         name: "default",

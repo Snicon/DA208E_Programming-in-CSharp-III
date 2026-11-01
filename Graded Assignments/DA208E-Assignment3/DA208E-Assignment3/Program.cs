@@ -11,6 +11,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
     builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +26,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// Note to self: p.580 in ASP.NET Core In Action (Third edition) by Andrew Lock, p.10 in Assignment 3 - Help document
+// from Canvas.
+app.UseAuthentication(); // Adds the authentication middleware
 app.UseAuthorization();
 
 app.MapStaticAssets();

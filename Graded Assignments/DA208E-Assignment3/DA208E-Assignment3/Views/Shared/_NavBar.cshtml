@@ -1,13 +1,13 @@
 <!-- Sixten Peterson (AQ9300) 2026-09-25 -->
 <!-- Very simple partial used for the navbar to clean up the _Layout.cshtml file -->
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-5">
+<nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light bg-white border-bottom box-shadow mb-5">
     <div class="container">
         <a class="navbar-brand" asp-controller="Home" asp-action="Index">Wedding App MVC</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
                 <!-- Using the NavItem partial to display all nav items -->
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Home", "Index", "Home"))
@@ -15,6 +15,8 @@
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Create", "Register guest"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Index", "Guest list"))
                 @await Html.PartialAsync("_NavItem", new NavItemModel("Dashboard", "Index", "Dashboard"))
+            </ul>
+            <ul class="navbar-nav">
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <li class="nav-item">

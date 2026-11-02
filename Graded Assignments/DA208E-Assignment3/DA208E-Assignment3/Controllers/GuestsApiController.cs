@@ -43,6 +43,12 @@ public class GuestsApiController : ControllerBase
         return Ok(guests);
     }
 
+    /// <summary>
+    /// Retrieves data about the specified guest from the database and essentially uses the GuestViewModel as a DTO to
+    /// expose a subset of guest data as JSON.
+    /// </summary>
+    /// <param name="id">The id of the guest to show data about</param>
+    /// <returns>A guest object in JSON if guest was found, or 404 if not found.</returns>
     [HttpGet("{id}")]
     public async Task<ActionResult> GetGuest(int id)
     {
@@ -56,10 +62,8 @@ public class GuestsApiController : ControllerBase
             .FirstOrDefaultAsync(g => g.Id == id);
         
         if (guest == null)
-        {
             return NotFound();
-        }
-        
+                
         return Ok(guest);
     }
 }

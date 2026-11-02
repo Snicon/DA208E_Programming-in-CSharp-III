@@ -21,6 +21,11 @@ public class EventsApiController : ControllerBase
         _context = context;
     }
 
+    /// <summary>
+    /// Retrieves all events from the database and essentially uses the GuestViewModel as a DTO to expose a subset of
+    /// event data as JSON.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EventViewModel>>> GetEvents()
     {

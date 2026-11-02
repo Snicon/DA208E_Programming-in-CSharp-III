@@ -1,4 +1,5 @@
 using DA208E_Assignment3.Data;
+using DA208E_Assignment3.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -41,6 +42,25 @@ app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+// Seeding below:
+// Heavily based on the following online article:
+// https://www.c-sharpcorner.com/article/implementing-role-based-authorization-in-asp-net-core-mvc
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await RoleSeeder.SeedRolesASync(roleManager);
+    
+    // Assigning roles to users:
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    var adminUser = await userManager.FindByEmailAsync("admin@admin.admin");
+    if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, "Admin"))
+    {
+        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+}
 
 
 app.Run();

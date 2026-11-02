@@ -13,7 +13,7 @@ namespace DA208E_Assignment3.Controllers;
 /// A basic CRUD controller for managing guests. It also includes additional actions for RSVP logic and a confirmation
 /// view.
 /// </summary>
-[Authorize]// Note to self: p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock, p 6 in Assignment 3 document
+[Authorize(Roles = "Admin")]// Note to self: p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock, p 6 in Assignment 3 document
 public class GuestController : Controller
 {
     #region Fields

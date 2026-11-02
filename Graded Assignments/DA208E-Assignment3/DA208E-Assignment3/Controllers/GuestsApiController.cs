@@ -1,4 +1,4 @@
-/* Sixten Peterson (AQ9300) 2026-11-01 */
+/* Sixten Peterson (AQ9300) 2026-11-02 */
 
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.ViewModels;
@@ -31,12 +31,35 @@ public class GuestsApiController : ControllerBase
     {
         var guests = await _context.Guests.Select(g => new GuestViewModel
         {
+            Id = g.Id,
             Name = g.Name,
             Email = g.Email,
             Attending = g.Attending,
             NumberOfAttendants = g.NumberOfAttendants
-        }).ToListAsync();
+        })
+        .OrderBy(g => g.Name)
+        .ToListAsync();
         
         return Ok(guests);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetGuest(int id)
+    {
+        var guest = await _context.Guests
+            .Where(g => g.Id == id)
+            .Select(g => new GuestViewModel
+            {
+                Id = g.Id,
+                Name = g.Name,
+            })
+            .FirstOrDefaultAsync(g => g.Id == id);
+        
+        if (guest == null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(guest);
     }
 }

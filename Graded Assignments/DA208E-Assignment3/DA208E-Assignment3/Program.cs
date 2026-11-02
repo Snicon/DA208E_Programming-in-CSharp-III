@@ -14,7 +14,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
     builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
@@ -53,7 +55,7 @@ using (var scope = app.Services.CreateScope())
     await RoleSeeder.SeedRolesASync(roleManager);
     
     // Assigning roles to users:
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
     var adminUser = await userManager.FindByEmailAsync("admin@admin.admin");
     if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, "Admin"))

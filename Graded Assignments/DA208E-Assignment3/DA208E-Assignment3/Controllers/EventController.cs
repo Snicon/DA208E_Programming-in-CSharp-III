@@ -1,7 +1,8 @@
-// Sixten Peterson (AQ9300) 2026-10-18
+// Sixten Peterson (AQ9300) 2026-11-02
 
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace DA208E_Assignment3.Controllers;
 /// <summary>
 /// A basic CRUD controller for managing events.
 /// </summary>
+[Authorize]// Note to self: p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock, p 6 in Assignment 3 document
 public class EventController : Controller
 {
     #region Fields
@@ -29,6 +31,7 @@ public class EventController : Controller
     /// information.
     /// </summary>
     /// <returns>The event index view along with a list of event data ordered by DateTime</returns>
+    [AllowAnonymous] // Overwrites the controller wide Authorize. p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock
     [HttpGet]
     public async Task<IActionResult> Index()
     {

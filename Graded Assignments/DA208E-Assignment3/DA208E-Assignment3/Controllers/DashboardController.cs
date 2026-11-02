@@ -2,6 +2,7 @@
 
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace DA208E_Assignment3.Controllers;
 /// A basic controller class for the dashboard, consisting of a simple index action. It uses the database to fetch
 /// relevant data.
 /// </summary>
+[Authorize]// Note to self: p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock, p 6 in Assignment 3 document
 public class DashboardController : Controller
 {
     #region Fields

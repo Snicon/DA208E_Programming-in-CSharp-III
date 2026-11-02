@@ -1,7 +1,8 @@
-// Sixten Peterson (AQ9300) 2026-10-18
+// Sixten Peterson (AQ9300) 2026-11-02
 
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Models;
+using DA208E_Assignment3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,14 @@ public class GuestController : Controller
     public async Task<IActionResult> Index()
     {
         var guests = await _context.Guests
+            .Select(g => new GuestViewModel
+            {
+                Id = g.Id,
+                Name = g.Name,
+                Email = g.Email,
+                Attending = g.Attending,
+                NumberOfAttendants = g.NumberOfAttendants
+            })
             .OrderBy(g => g.Name) // Sorting by name
             .ToListAsync();
         

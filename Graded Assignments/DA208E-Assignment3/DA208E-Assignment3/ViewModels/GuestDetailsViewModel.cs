@@ -1,7 +1,9 @@
 // Sixten Peterson (AQ9300) 2026-11-02
 namespace DA208E_Assignment3.ViewModels;
 
-// TODO: Comment
+/// <summary>
+/// Simple ViewModel representing a guest.
+/// </summary>
 public class GuestDetailsViewModel
 {
     public int Id { get; set; }

@@ -1,3 +1,4 @@
+// Sixten Peterson (AQ9300) 2026-11-03
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DA208E_Assignment3.Controllers;
 
+/// <summary>
+/// Simple API controller used to expose statistics data over a JSON REST API. The data roughly matches the statistics
+/// in the dashboard.
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class StatisticsApiController : ControllerBase
@@ -16,6 +21,11 @@ public class StatisticsApiController : ControllerBase
         _context = context;
     }
 
+    /// <summary>
+    /// Retrieves all the relevant data from the database and uses the StatisticsViewModel as a DTO to expose
+    /// the data as JSON.
+    /// </summary>
+    /// <returns>Guest statistics as JSON</returns>
     [HttpGet]
     public async Task<ActionResult<StatisticsViewModel>> GetStatistics()
     {

@@ -10,7 +10,7 @@ namespace DA208E_Assignment3.Controllers;
 /// <summary>
 /// Simple API controller used to expose event data over a JSON REST API.
 /// </summary>
-[Route("api/[controller]")]
+[Route("api/events")]
 [ApiController]
 public class EventsApiController : ControllerBase
 {

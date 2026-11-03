@@ -10,7 +10,7 @@ namespace DA208E_Assignment3.Controllers;
 /// Simple API controller used to expose statistics data over a JSON REST API. The data roughly matches the statistics
 /// in the dashboard.
 /// </summary>
-[Route("api/[controller]")]
+[Route("api/statistics")]
 [ApiController]
 public class StatisticsApiController : ControllerBase
 {

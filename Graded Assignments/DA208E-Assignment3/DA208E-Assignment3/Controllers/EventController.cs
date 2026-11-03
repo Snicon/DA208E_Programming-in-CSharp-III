@@ -152,9 +152,18 @@ public class EventController : Controller
     /// <param name="id">The id of the event to delete</param>
     /// <returns>Not found if no matching event is found, otherwise the delete view.</returns>
     [HttpGet]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-        var theEvent = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+        var theEvent = await _context.Events
+            .Where(e => e.Id == id)
+            .Select(g => new EventManagementViewModel
+            {
+                Id = g.Id,
+                Title = g.Title,
+                Description = g.Description,
+                DateTime = g.DateTime
+            })
+            .FirstOrDefaultAsync();
         
         if (theEvent == null) // No matching event found
             return NotFound();

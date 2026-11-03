@@ -59,9 +59,21 @@ public class GuestController : Controller
     /// <param name="id">The id of the guest</param>
     /// <returns>Not found if no matching guest is found, otherwise the details view along with the guest data</returns>
     [HttpGet]
-    public async Task<IActionResult> Details(int id)
+    public async Task<ActionResult<GuestDetailsViewModel>> Details(int id)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        var guest = await _context.Guests
+            .Where(g => g.Id == id)
+            .Select(g => new GuestDetailsViewModel
+            {
+                Id = g.Id,
+                Name = g.Name,
+                Email = g.Email,
+                PhoneNumber = g.PhoneNumber,
+                Attending = g.Attending,
+                NumberOfAttendants = g.NumberOfAttendants,
+                Message = g.Message
+            })
+            .FirstOrDefaultAsync(g  => g.Id == id);
         
         if (guest == null)
             return NotFound();

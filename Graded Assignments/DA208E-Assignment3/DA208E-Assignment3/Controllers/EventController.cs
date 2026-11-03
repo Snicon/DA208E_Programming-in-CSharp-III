@@ -2,6 +2,7 @@
 
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Models;
+using DA208E_Assignment3.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +49,7 @@ public class EventController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        return View();
+        return View(new EventViewModel());
     }
     
     /// <summary>

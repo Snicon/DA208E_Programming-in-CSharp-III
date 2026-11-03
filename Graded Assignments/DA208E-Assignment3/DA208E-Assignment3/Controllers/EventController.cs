@@ -34,9 +34,16 @@ public class EventController : Controller
     /// <returns>The event index view along with a list of event data ordered by DateTime</returns>
     [AllowAnonymous] // Overwrites the controller wide Authorize. p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<ActionResult<IEnumerable<EventViewModel>>> Index()
     {
-        var events = await _context.Events.OrderBy(e => e.DateTime).ToListAsync();
+        var events = await _context.Events.Select(e => new EventViewModel
+        {
+            Title = e.Title,
+            Description = e.Description,
+            DateTime = e.DateTime
+        })
+        .OrderBy(e => e.DateTime)
+        .ToListAsync();
         
         return View(events);
     }

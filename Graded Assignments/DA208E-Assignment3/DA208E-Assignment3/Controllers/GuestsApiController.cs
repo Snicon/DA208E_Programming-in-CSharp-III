@@ -1,10 +1,8 @@
 /* Sixten Peterson (AQ9300) 2026-11-02 */
 
-using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Services;
 using DA208E_Assignment3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DA208E_Assignment3.Controllers;
 

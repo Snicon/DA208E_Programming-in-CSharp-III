@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Data.Seed;
+using DA208E_Assignment3.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -19,6 +20,8 @@ builder.Services.AddRazorPages(); // Needed for the scaffolded identity pages
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
     builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddScoped<GuestService>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddRoles<IdentityRole>()

@@ -1,6 +1,7 @@
 /* Sixten Peterson (AQ9300) 2026-11-02 */
 
 using DA208E_Assignment3.Data;
+using DA208E_Assignment3.Services;
 using DA208E_Assignment3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,11 @@ namespace DA208E_Assignment3.Controllers;
 [ApiController]
 public class GuestsApiController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly GuestService _service;
     
-    public GuestsApiController(ApplicationDbContext context)
+    public GuestsApiController(GuestService service)
     {
-        _context = context;
+        _service = service;
     }
     
     /// <summary>
@@ -29,18 +30,18 @@ public class GuestsApiController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GuestViewModel>>> GetGuests()
     {
-        var guests = await _context.Guests.Select(g => new GuestViewModel
+        var guests = await _service.GetAllGuestsAsync();
+        
+        var viewModel = guests.Select(g => new GuestViewModel
         {
             Id = g.Id,
             Name = g.Name,
             Email = g.Email,
             Attending = g.Attending,
             NumberOfAttendants = g.NumberOfAttendants
-        })
-        .OrderBy(g => g.Name)
-        .ToListAsync();
+        }).OrderBy(g => g.Name).ToList();
         
-        return Ok(guests);
+        return Ok(viewModel);
     }
 
     /// <summary>
@@ -52,18 +53,20 @@ public class GuestsApiController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult> GetGuest(int id)
     {
-        var guest = await _context.Guests
-            .Where(g => g.Id == id)
-            .Select(g => new GuestViewModel
-            {
-                Id = g.Id,
-                Name = g.Name,
-            })
-            .FirstOrDefaultAsync(g => g.Id == id);
-        
+        var guest = await _service.GetGuestByIdAsync(id);
+           
         if (guest == null)
             return NotFound();
+
+        var viewModel = new GuestViewModel
+        {
+            Id = guest.Id,
+            Name = guest.Name,
+            Email = guest.Email,
+            Attending = guest.Attending,
+            NumberOfAttendants = guest.NumberOfAttendants
+        };
                 
-        return Ok(guest);
+        return Ok(viewModel);
     }
 }

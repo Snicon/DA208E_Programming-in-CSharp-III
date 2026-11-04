@@ -1,7 +1,7 @@
-// Sixten Peterson (AQ9300) 2026-11-02
+// Sixten Peterson (AQ9300) 2026-11-04
 
-using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Models;
+using DA208E_Assignment3.Services;
 using DA208E_Assignment3.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,17 +14,18 @@ namespace DA208E_Assignment3.Controllers;
 /// view.
 /// </summary>
 //[Authorize(Roles = "Admin")]// Note to self: p.597 in ASP.NET Core In Action (Third edition) by Andrew Lock, p 6 in Assignment 3 document
-[Authorize(Policy = "GuestManager")] // Note to self: p601 in ASP.NET Core In Action (Third edition) by Andrew Lock
+[Authorize(Policy = "GuestManager")] // Note to self: p.601 in ASP.NET Core In Action (Third edition) by Andrew Lock
 public class GuestController : Controller
 {
     #region Fields
-    private readonly ApplicationDbContext _context;
+
+    private readonly GuestService _service;
     #endregion
 
     #region Constructors
-    public GuestController(ApplicationDbContext context)
+    public GuestController(GuestService service)
     {
-        _context = context;
+        _service = service;
     }
     #endregion
     
@@ -38,8 +39,9 @@ public class GuestController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var guests = await _context.Guests
-            .Select(g => new GuestViewModel
+        var guests = await _service.GetAllGuestsAsync();
+        
+        var viewModel = guests.Select(g => new GuestViewModel
             {
                 Id = g.Id,
                 Name = g.Name,
@@ -48,9 +50,9 @@ public class GuestController : Controller
                 NumberOfAttendants = g.NumberOfAttendants
             })
             .OrderBy(g => g.Name) // Sorting by name
-            .ToListAsync();
+            .ToList();
         
-        return View(guests);
+        return View(viewModel);
     }
     
     /// <summary>
@@ -62,24 +64,25 @@ public class GuestController : Controller
     [HttpGet]
     public async Task<ActionResult<GuestDetailsViewModel>> Details(int id)
     {
-        var guest = await _context.Guests
-            .Where(g => g.Id == id)
-            .Select(g => new GuestDetailsViewModel
-            {
-                Id = g.Id,
-                Name = g.Name,
-                Email = g.Email,
-                PhoneNumber = g.PhoneNumber,
-                Attending = g.Attending,
-                NumberOfAttendants = g.NumberOfAttendants,
-                Message = g.Message
-            })
-            .FirstOrDefaultAsync(g  => g.Id == id);
-        
+        var guest = await _service.GetGuestByIdAsync(id);
+
         if (guest == null)
+        {
             return NotFound();
+        }
+
+        var viewModel = new GuestDetailsViewModel
+        {
+            Id = guest.Id,
+            Name = guest.Name,
+            Email = guest.Email,
+            PhoneNumber = guest.PhoneNumber,
+            Attending = guest.Attending,
+            NumberOfAttendants = guest.NumberOfAttendants,
+            Message = guest.Message
+        };
         
-        return View(guest);
+        return View(viewModel);
     }
     
     /// <summary>
@@ -112,13 +115,12 @@ public class GuestController : Controller
             return View();
         }
         
-        _context.Guests.Add(guest);
         try
         {
-            await _context.SaveChangesAsync();
+            await _service.CreateGuestAsync(guest);
         }
         catch (DbUpdateException)
-        { }
+        {}
 
         return RedirectToAction("Index");
     }
@@ -133,7 +135,7 @@ public class GuestController : Controller
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        var guest = await _service.GetGuestByIdAsync(id);
         
         if(guest == null) // No matching guest found
             return NotFound();
@@ -146,33 +148,32 @@ public class GuestController : Controller
     /// in the database. Uses TempData to pass a message to the dashboard view with the status of the edit.
     /// </summary>
     /// <param name="id">The id of the guest to update</param>
+    /// <param name="submittedGuest">The guest data</param>
     /// <returns>Not found if no matching event is found, otherwise redirection to dashboard index view</returns>
     [HttpPost]
     [ActionName("Edit")]
-    public async Task<IActionResult> EditGuest(int id)
+    public async Task<IActionResult> EditGuest(int id, Guest submittedGuest)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        if (!ModelState.IsValid)
+            return View(submittedGuest);
         
-        if (guest == null) // No matching guest found
-            return NotFound();
-
-        // For reference: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-10.0#update-the-edit-page
-        if (await TryUpdateModelAsync<Guest>(
-                guest,
-                "",
-                g => g.Name, g => g.Email, g => g.PhoneNumber))
+        try
         {
-            try
+            var updated = await _service.UpdateGuestAsync(id, submittedGuest);
+
+            if (updated)
             {
-                await _context.SaveChangesAsync();
                 TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
-                TempData["Message"] = "Guest successfully updated."; // Setting relevant message, which is used for the same as above
+                TempData["Message"] = "Guest successfully updated."; // Setting relevant message, which is used for the same as above   
             }
-            catch (DbUpdateException)
+            else
             {
-                TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
-                TempData["Message"] = "Failed to update guest."; // Same as above
+                FailureMessage();
             }
+        }
+        catch (DbUpdateException)
+        {
+            FailureMessage();
         }
         
         return RedirectToAction("Index", "Dashboard");
@@ -187,7 +188,7 @@ public class GuestController : Controller
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        var guest = await _service.GetGuestByIdAsync(id);
         
         if (guest == null) // No matching guest found
             return NotFound();
@@ -206,23 +207,23 @@ public class GuestController : Controller
     [ActionName("Delete")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
-
-        if (guest == null) // No matching guest found
-            return NotFound();
-
         try
         {
-            _context.Guests.Remove(guest);
-            await _context.SaveChangesAsync();
-            
-            TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
-            TempData["Message"] = "Guest successfully deleted."; // Setting relevant message, which is used for the same as above
+            bool deleted = await _service.DeleteGuestAsync(id);
+
+            if (deleted)
+            {
+                TempData["MessageType"] = "success"; // Setting relevant message type, which is used for alerts in UI
+                TempData["Message"] = "Guest successfully deleted."; // Setting relevant message, which is used for the same as above   
+            }
+            else
+            {
+                FailureMessage("delete");
+            }
         }
         catch (DbUpdateException)
         {
-            TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
-            TempData["Message"] = "Failed to delete guest."; // Same as above
+            FailureMessage("delete");
         }
         
         return RedirectToAction("Index", "Dashboard");
@@ -238,7 +239,7 @@ public class GuestController : Controller
     [HttpGet]
     public async Task<IActionResult> Rsvp(int id)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        var guest = await _service.GetGuestByIdAsync(id);
 
         if (guest == null) // No matching guest found
             return NotFound();
@@ -257,22 +258,16 @@ public class GuestController : Controller
     {
         if (!ModelState.IsValid) // Validation failed
             return View(model);
-
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == model.Id);
-
-        if (guest == null) // No matching guest found
-            return NotFound();
         
-        guest.Name = model.Name;
-        guest.Email = model.Email;
-        guest.PhoneNumber = model.PhoneNumber;
-        guest.NumberOfAttendants = model.NumberOfAttendants;
-        guest.Attending = model.Attending;
-        guest.Message = model.Message;
-
-        await _context.SaveChangesAsync();
+        try
+        {
+            if (!await _service.UpdateGuestRsvpAsync(model))
+                return NotFound();
+        }
+        catch (DbUpdateException)
+        { }
         
-        return RedirectToAction("Confirmation", "Guest", new { id = guest.Id });
+        return RedirectToAction("Confirmation", "Guest", new { id = model.Id });
     }
     
     /// <summary>
@@ -284,7 +279,7 @@ public class GuestController : Controller
     [HttpGet]
     public async Task<IActionResult> Confirmation(int id)
     {
-        var guest = await _context.Guests.FirstOrDefaultAsync(g => g.Id == id);
+        var guest = await _service.GetGuestByIdAsync(id);
 
         if (guest == null) // No matching guest found
             return NotFound();
@@ -297,5 +292,14 @@ public class GuestController : Controller
         return View(model);
     }
     #endregion
+    #endregion
+    
+    #region Helpers
+
+    private void FailureMessage(string action = "update")
+    {
+        TempData["MessageType"] = "danger"; // Overwriting the MessageType since something went wrong
+        TempData["Message"] = $"Failed to {action} guest."; // Same as above
+    }
     #endregion
 }

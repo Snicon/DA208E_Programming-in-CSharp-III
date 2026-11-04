@@ -14,7 +14,7 @@ public class GuestService
 
     public GuestService(ApplicationDbContext context)
     {
-        _context = context;   
+        _context = context;
     }
 
     /// <summary>
@@ -34,5 +34,79 @@ public class GuestService
     public async Task<Guest?> GetGuestByIdAsync(int id)
     {
         return await _context.Guests.FindAsync(id);
+    }
+    
+    /// <summary>
+    /// Attempts to store the provided guest object in the database.
+    /// </summary>
+    /// <param name="guest">The new guest object to add to the database.</param>
+    public async Task CreateGuestAsync(Guest guest)
+    {
+        _context.Guests.Add(guest);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Attempts to update the user of the given id with the data provided in the updatedGuest object
+    /// </summary>
+    /// <param name="id">The id of the guest to update</param>
+    /// <param name="updatedGuest">The guest object containing the changes</param>
+    /// <returns>True if successful, false if not.</returns>
+    public async Task<bool> UpdateGuestAsync(int id, Guest updatedGuest)
+    {
+        var guest = await GetGuestByIdAsync(id);
+        
+        if (guest == null)
+            return false;
+        
+        guest.Name = updatedGuest.Name;
+        guest.Email = updatedGuest.Email;
+        guest.PhoneNumber = updatedGuest.PhoneNumber;
+        
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    /// <summary>
+    /// Attempts to delete the guest of the provided id from the database.
+    /// </summary>
+    /// <param name="id">The id of the guest to delete from the database</param>
+    /// <returns>True if successful, false if not.</returns>
+    public async Task<bool> DeleteGuestAsync(int id)
+    {
+        var guest = await GetGuestByIdAsync(id);
+
+        if (guest == null)
+            return false;
+
+        _context.Guests.Remove(guest);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    
+    /// <summary>
+    /// Attempts to update the user of the given id with the data provided in the updatedGuest object
+    /// This method includes not only basic user data but also RSVP-related user data which is how it differs
+    /// from the "normal" update method.
+    /// </summary>
+    /// <param name="id">The id of the guest to update</param>
+    /// <param name="updatedGuest">The guest object containing the changes</param>
+    /// <returns>True if successful, false if not.</returns>
+    public async Task<bool> UpdateGuestRsvpAsync(Guest updatedGuest)
+    {
+        var guest = await GetGuestByIdAsync(updatedGuest.Id);
+        
+        if (guest == null)
+            return false;
+        
+        guest.Name = updatedGuest.Name;
+        guest.Email = updatedGuest.Email;
+        guest.PhoneNumber = updatedGuest.PhoneNumber;
+        guest.NumberOfAttendants = updatedGuest.NumberOfAttendants;
+        guest.Attending = updatedGuest.Attending;
+        guest.Message = updatedGuest.Message;
+        
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

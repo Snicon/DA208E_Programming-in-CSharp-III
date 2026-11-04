@@ -1,9 +1,15 @@
+// Sixten Peterson (AQ9300) 2026-11-04
+using System.Security.Claims;
 using DA208E_Assignment3.Data;
 using DA208E_Assignment3.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Note to self: p.602 in ASP.NET Core In Action (Third edition) by Andrew Lock
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("GuestManager", policyBuilder => policyBuilder.RequireClaim("CanManageGuests", "true"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -58,11 +64,21 @@ using (var scope = app.Services.CreateScope())
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
     var adminUser = await userManager.FindByEmailAsync("admin@admin.admin");
-    if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, "Admin"))
-    {
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+    
+    if (adminUser != null){
+        if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
+        
+        // Adding the claim to the user, maybe not the cleanest solution, but it works.
+        var claims = await userManager.GetClaimsAsync(adminUser);
+
+        if (!claims.Any(c => c.Type == "CanManageGuests" && c.Value == "true"))
+        {
+            await userManager.AddClaimAsync(adminUser, new Claim("CanManageGuests", "true"));
+        }
     }
 }
-
 
 app.Run();

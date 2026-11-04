@@ -16,6 +16,11 @@
                     @await Html.PartialAsync("_NavItem", new NavItemModel("Guest", "Index", "Guest list"))
                     @await Html.PartialAsync("_NavItem", new NavItemModel("Dashboard", "Index", "Dashboard"))
                     @await Html.PartialAsync("_NavItem", new NavItemModel("GuestsApi", "GetGuests", "Guests API"))
+                    <li class="nav-item">
+                        <a href="/api/guests/1" class="nav-link">
+                            Guest API (specific guest)
+                        </a>
+                    </li>
                     @await Html.PartialAsync("_NavItem", new NavItemModel("EventsApi", "GetEvents", "Events API"))
                     @await Html.PartialAsync("_NavItem", new NavItemModel("StatisticsApi", "GetStatistics", "Statistics API"))
                     @*

@@ -72,7 +72,7 @@ More assignments will be added as the course progresses
 |Quiz 1           |&#9745;|A|A|
 |Assignment 3     |&#9745;|-|A|
 |Assignment 4     |&#9744;|-|A|
-|Quiz 2           |&#9744;|-|A|
+|Quiz 2           |&#9745;|A|A|
 |Assignment 5     |&#9744;|-|A|
 |Quiz 3           |&#9744;|-|A|
 |Assignment 6, pt1|&#9744;|-|A|

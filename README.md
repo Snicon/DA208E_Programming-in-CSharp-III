@@ -5,7 +5,7 @@ This is the continuation course of the [Programming in C#, II course (DA205E)](h
 
 ## Structure
 
-This repo contains all the assignments I've worked on along any other relevant files. For all graded work see the "Graded Assignments" folder. For images of the applications created in the different assignments please refer to the "Application Images", or this readme.
+This repo contains all the assignments I've worked on along with any other relevant files. For all graded work see the "Graded Assignments" folder. For images of the applications created in the different assignments please refer to the "Application Images", or this readme. (Images will be added after the course is completed.)
 
 
 
@@ -42,7 +42,7 @@ The assignment intends to give practical experience with:
 ### Assignment 3 - MVC, LINQ (RESTful Web APIs)
 Assignment 3 takes the project from the prior assignments and introduces web APIs along with identity and security.
 
-The assignment intents to give practical experience with:
+The assignment intends to give practical experience with:
 - RESTful Web APIs
 - Client-server architecture
 - JSON data exchange and serialization
@@ -54,7 +54,18 @@ The assignment intents to give practical experience with:
 - Data projections using ViewModels and anonymous types
 
 ### Assignment 4 - Full-Stack Development with Blazor & WebAPI
-To be added.
+Assignment 4 introduces a completely new web application, a Hair Salon Management System. This assignment takes everything we have learned about ASP.NET from assignment 1 on through 3 and adds Blazor to the mix.
+
+The assignment intends to give practical experience with:
+- Building interactive web applications using Blazor
+- Creating re-usable Razor components
+- Consuming Web APIs from a Blazor application
+- Integrating front-end and back-end functionality
+- Working with EF Core in full-stack solutions
+- Securing applications with ASP.NET Core Identity
+- Applying modern ASP.NET Core development practices
+- Designing and implementing a layered application architecture
+- Applying software engineering principles such as separation of concerns and core reusability
 
 ### Assignment 5 - WPF, Unit Testing, MSTest, NUnit and xUnit
 To be added.
